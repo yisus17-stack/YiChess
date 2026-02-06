@@ -1,0 +1,46 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-chess",
+      "description": "A stylish image of a chess set.",
+      "imageUrl": "https://images.unsplash.com/photo-1640954244104-2429acf756b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaGVzcyUyMGJvYXJkfGVufDB8fHx8MTc3MDIzODg0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "chess board"
+    },
+    {
+      "id": "king",
+      "description": "A king chess piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1695265906368-42f1202ced9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8a2luZyUyMGNoZXNzfGVufDB8fHx8MTc3MDM0NTMyNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "king chess"
+    },
+    {
+      "id": "queen",
+      "description": "A queen chess piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1656517046772-b057e9cf31db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxxdWVlbiUyMGNoZXNzfGVufDB8fHx8MTc3MDM0NTMyNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "queen chess"
+    },
+    {
+      "id": "rook",
+      "description": "A rook chess piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1705931819853-cce7c8d69f10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyb29rJTIwY2hlc3N8ZW58MHx8fHwxNzcwMzQ1MzI1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "rook chess"
+    },
+    {
+      "id": "bishop",
+      "description": "A bishop chess piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1749254977148-5fab6e358a4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiaXNob3AlMjBjaGVzc3xlbnwwfHx8fDE3NzAzNDUzMjV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bishop chess"
+    },
+    {
+      "id": "knight",
+      "description": "A knight chess piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1654592200845-f5d22b8da331?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8a25pZ2h0JTIwY2hlc3N8ZW58MHx8fHwxNzcwMzQ1MzI1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "knight chess"
+    },
+    {
+      "id": "pawn",
+      "description": "A pawn chess piece.",
+      "imageUrl": "https://images.unsplash.com/photo-1763461092785-816bddca2ee1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwYXduJTIwY2hlc3N8ZW58MHx8fHwxNzcwMzQ1MzI1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "pawn chess"
+    }
+  ]
+}
