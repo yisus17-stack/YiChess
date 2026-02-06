@@ -22,8 +22,12 @@ export default function HomePage() {
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
                 </p>
                 <div className="flex gap-4">
-                <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">Empezar ahora</button>
-                <button className="border border-gray-200 text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">Ver Rankings</button>
+                <Link href="/jugar">
+                  <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all" >Empezar ahora</button>
+                </Link>
+                <Link href="/reglas">
+                  <button className="border border-gray-200 text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">Ver reglas</button>
+                </Link>
                 </div>
             </div>
             <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center">
