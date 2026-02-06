@@ -16,7 +16,7 @@ export default function HomePage() {
             <div className="flex-1 text-left">
                 <span className="text-xs font-black uppercase tracking-[0.3em] text-gray-400 block mb-4">Plataforma de Ajedrez</span>
                 <h1 className="text-[#1a1a1a] text-6xl font-extrabold leading-tight tracking-tighter mb-8">
-                Aprende acerca de ajedrez con <span className="text-primary">YiChess</span>
+                Aprende de ajedrez en <span className="text-primary">YiChess</span>
                 </h1>
                 <p className="text-gray-600 text-xl font-light leading-relaxed max-w-lg mb-10">
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
