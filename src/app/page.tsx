@@ -30,16 +30,18 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center
-                opacity-0 translate-y-6 animate-fadeInUp">
-              <Image
-                alt="YiChess Pro"
-                className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
-                src="/chessin-hero.png"
-                width={480}
-                height={480}
-              />
+            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center">
+              <div className="animate-fadeInSoft">
+                <Image
+                  alt="YiChess Pro"
+                  className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  src="/chessin-hero.png"
+                  width={480}
+                  height={480}
+                />
+              </div>
             </div>
+
 
           </div>
         </div>
