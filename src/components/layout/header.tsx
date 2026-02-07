@@ -35,12 +35,12 @@ function SearchDialog() {
     { title: 'Estrategias', path: '/estrategias', description: 'Descubre estrategias, aperturas y tácticas para mejorar tu juego y ganar más partidas.', keywords: 'tácticas aperturas mates' },
     { title: 'Contacto', path: '/contacto', description: 'Envíanos tus sugerencias, preguntas o comentarios sobre YiChess.', keywords: 'email mensaje' },
     // Estrategias individuales
-    { title: 'Aperturas', path: '/estrategias', description: 'Explora las aperturas más comunes y sus variantes para empezar tus partidas con ventaja.', keywords: 'estrategia' },
+    { title: 'Principios de Apertura', path: '/estrategias', description: 'Explora las ideas fundamentales para empezar tus partidas con una sólida ventaja.', keywords: 'estrategia apertura' },
     { title: 'Gambito de Dama', path: '/estrategias', description: 'Una de las aperturas más antiguas y respetadas. Aprende a dominarla.', keywords: 'estrategia apertura' },
     { title: 'Defensa Siciliana', path: '/estrategias', description: 'La respuesta más popular y agresiva contra 1.e4. Descubre sus secretos.', keywords: 'estrategia apertura defensa' },
-    { title: 'Enroque', path: '/estrategias', description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental.', keywords: 'estrategia movimiento especial rey torre' },
-    { title: 'Jaque Mate', path: '/estrategias', description: 'El objetivo final del ajedrez. Aprende diferentes patrones de jaque mate.', keywords: 'estrategia táctica fin de juego' },
+    { title: 'Patrones de Jaque Mate', path: '/estrategias', description: 'El objetivo final del ajedrez. Aprende diferentes patrones para dar el golpe de gracia.', keywords: 'estrategia táctica fin de juego' },
     { title: 'Estrategia General', path: '/estrategias', description: 'Conceptos clave como el control del centro, desarrollo de piezas y estructura de peones.', keywords: 'estrategia conceptos' },
+    { title: 'Enroque', path: '/estrategias', description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental para la seguridad y la coordinación.', keywords: 'estrategia movimiento especial rey torre seguridad' },
   ];
 
   React.useEffect(() => {
