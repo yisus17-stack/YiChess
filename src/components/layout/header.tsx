@@ -19,27 +19,79 @@ import {
 import { Input } from "@/components/ui/input";
 import type { SearchableContent } from '@/lib/definitions';
 
-const searchableContent: SearchableContent[] = [
-  { title: 'Reglas', path: '/reglas', description: 'Aprende las reglas básicas del ajedrez y el movimiento de cada pieza.' },
-  { title: 'Estrategias', path: '/estrategias', description: 'Descubre estrategias y tácticas para principiantes, incluyendo aperturas y mates básicos.' },
-  { title: 'Contacto', path: '/contacto', description: 'Envíanos tus sugerencias o comentarios sobre YiChess Simplificado.' }
-];
-
 function SearchDialog() {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [filteredContent, setFilteredContent] = React.useState<SearchableContent[]>([]);
+  const [searchTime, setSearchTime] = React.useState<number | null>(null);
 
-  const filteredContent = searchTerm
-    ? searchableContent.filter(
-        item =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.description.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    : [];
+  const searchableContent: SearchableContent[] = [
+    { title: 'Inicio', path: '/', description: 'Página principal de YiChess. Comienza tu viaje en el ajedrez.', keywords: 'home principal' },
+    { title: 'Jugar', path: '/jugar', description: 'Juega partidas de ajedrez contra la IA. Pon a prueba tus habilidades.', keywords: 'partida ia computadora' },
+    { title: 'Puzzles', path: '/puzzles', description: 'Resuelve puzzles y problemas de ajedrez para mejorar tu táctica y visión de juego.', keywords: 'problemas táctica' },
+    { title: 'Reglas', path: '/reglas', description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y conceptos fundamentales.', keywords: 'normas piezas movimiento' },
+    { title: 'Estrategias', path: '/estrategias', description: 'Descubre estrategias, aperturas y tácticas para mejorar tu juego y ganar más partidas.', keywords: 'tácticas aperturas mates' },
+    { title: 'Contacto', path: '/contacto', description: 'Envíanos tus sugerencias, preguntas o comentarios sobre YiChess.', keywords: 'email mensaje' },
+  ];
+
+  React.useEffect(() => {
+    if (!open) {
+      setSearchTerm('');
+      setFilteredContent([]);
+      setSearchTime(null);
+      return;
+    }
+
+    if (searchTerm.trim() === '') {
+      setFilteredContent([]);
+      setSearchTime(null);
+      return;
+    }
+
+    const startTime = performance.now();
+    const results = searchableContent.filter(item => {
+      const term = searchTerm.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(term) ||
+        item.description.toLowerCase().includes(term) ||
+        item.keywords?.toLowerCase().includes(term)
+      );
+    });
+    const endTime = performance.now();
+
+    setFilteredContent(results);
+    setSearchTime(endTime - startTime);
+
+  }, [searchTerm, open]);
 
   const handleLinkClick = () => {
     setOpen(false);
   };
+  
+  const Highlight: React.FC<{ text: string; highlight: string }> = ({ text, highlight }) => {
+    if (!highlight.trim()) {
+      return <span>{text}</span>;
+    }
+    const safeHighlight = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${safeHighlight})`, 'gi');
+    if (!text || !text.split) return <span>{text}</span>
+    const parts = text.split(regex);
+
+    return (
+      <>
+        {parts.map((part, i) =>
+          part.toLowerCase() === highlight.toLowerCase() ? (
+            <strong key={i} className="bg-primary/20 text-primary rounded-sm px-0.5 font-bold">
+              {part}
+            </strong>
+          ) : (
+            <span key={i}>{part}</span>
+          )
+        )}
+      </>
+    );
+  };
+
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -66,31 +118,45 @@ function SearchDialog() {
             />
         </div>
         <div className="p-6 overflow-auto max-h-[400px]">
-            {searchTerm && filteredContent.length > 0 ? (
-                <div className="space-y-4">
-                    <h2 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white mb-4">
-                        Resultados para "{searchTerm}"
-                    </h2>
-                    <div className="space-y-3">
-                        {filteredContent.map(item => (
-                        <Link href={item.path} key={item.path} className="block group" onClick={handleLinkClick}>
-                            <div className="p-4 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
-                            <div className="flex flex-row items-center justify-between">
-                                <div>
-                                <h3 className="text-base font-bold text-gray-900 dark:text-white">{item.title}</h3>
-                                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{item.description}</p>
+            {searchTerm.trim() !== '' ? (
+              <>
+                {filteredContent.length > 0 ? (
+                  <div className="space-y-4">
+                      <div className="text-xs text-gray-500 dark:text-gray-400 flex justify-between">
+                        <span>{filteredContent.length} {filteredContent.length === 1 ? 'resultado' : 'resultados'}</span>
+                        {searchTime !== null && <span>en {searchTime.toFixed(2)} ms</span>}
+                      </div>
+                      <div className="space-y-3 mt-4">
+                          {filteredContent.map(item => (
+                            <Link href={item.path} key={item.path} className="block group" onClick={handleLinkClick}>
+                                <div className="p-4 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
+                                  <div className="flex flex-row items-center justify-between">
+                                      <div>
+                                        <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                                          <Highlight text={item.title} highlight={searchTerm} />
+                                        </h3>
+                                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                          <Highlight text={item.description} highlight={searchTerm} />
+                                        </p>
+                                      </div>
+                                      <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
+                                  </div>
                                 </div>
-                                <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
-                            </div>
-                            </div>
-                        </Link>
-                        ))}
-                    </div>
-                </div>
+                            </Link>
+                          ))}
+                      </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-10 h-full flex flex-col items-center justify-center">
+                    <p className="text-gray-600 dark:text-gray-400 font-semibold">No se encontraron resultados para "{searchTerm}".</p>
+                    <p className="text-sm text-gray-500 mt-2">Intenta con una búsqueda diferente o con términos más generales.</p>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="text-center py-10 h-full flex items-center justify-center">
                   <p className="text-gray-600 dark:text-gray-400">
-                    {searchTerm ? "No se encontraron resultados." : "Encuentra cualquier cosa en YiChess."}
+                    Encuentra cualquier cosa en YiChess.
                   </p>
               </div>
             )}
