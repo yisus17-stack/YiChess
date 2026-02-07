@@ -40,31 +40,33 @@ export default function RulesPage() {
     <div className="max-w-[1200px] w-full px-10">
       <AppBreadcrumb />
       <div className='max-w-4xl mx-auto'>
-        <header className="text-center mb-12">
+        <header className="text-center mb-16">
             <h1 className="text-[#1a1a1a] dark:text-white text-5xl font-extrabold leading-tight tracking-tight mb-6">Reglas del Ajedrez</h1>
             <p className="text-gray-600 dark:text-gray-400 text-lg font-light leading-relaxed max-w-xl mx-auto">
-                Aprende los movimientos de cada pieza y los conceptos básicos para dominar el juego.
+                Aquí tienes una guía visual de cada pieza. Aprende sus movimientos y domina el tablero.
             </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {chessPieces.map((piece) => (
-                <Card key={piece.name} className="flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-card shadow-sm hover:shadow-lg transition-shadow duration-300">
-                    <CardHeader>
-                        <CardTitle>{piece.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow flex flex-col justify-between p-6 pt-0">
-                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                            {piece.description}
-                        </p>
+                <Card key={piece.name} className="rounded-2xl bg-card shadow-lg border-transparent hover:shadow-2xl transition-all duration-300 group flex flex-col">
+                    <div className="overflow-hidden rounded-t-2xl">
                         <Image
                             src={piece.imageUrl}
                             alt={`Imagen de la pieza de ajedrez: ${piece.name}`}
                             width={600}
                             height={400}
                             data-ai-hint={piece.imageHint}
-                            className="rounded-lg object-cover aspect-[4/3] w-full shadow-md mt-auto"
+                            className="object-cover aspect-[16/9] w-full group-hover:scale-105 transition-transform duration-500 ease-in-out"
                         />
+                    </div>
+                    <CardHeader className="p-6">
+                        <CardTitle className="text-2xl font-bold text-card-foreground">{piece.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6 pt-0 flex-grow">
+                        <p className="text-base text-muted-foreground leading-relaxed">
+                            {piece.description}
+                        </p>
                     </CardContent>
                 </Card>
             ))}
