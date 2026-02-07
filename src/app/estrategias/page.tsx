@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
-import { BookOpen, BrainCircuit, Castle, Crown, Shield, Swords, Zap, Goal, UnfoldVertical, Pin, GitFork, Windmill } from 'lucide-react';
+import { BookOpen, BrainCircuit, Castle, Crown, Shield, Swords, Zap, Goal, UnfoldVertical, Pin, GitFork, Wind } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -60,7 +60,7 @@ const strategies = [
   {
     name: 'El Molino',
     description: 'Una rara pero devastadora táctica que combina jaques a la descubierta repetidos para ganar material.',
-    icon: <Windmill className="size-10 text-primary" />,
+    icon: <Wind className="size-10 text-primary" />,
     href: '#'
   },
   {
