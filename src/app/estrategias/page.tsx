@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
-import { BookOpen, BrainCircuit, Castle, Crown, Shield, Swords } from 'lucide-react';
+import { BookOpen, BrainCircuit, Castle, Crown, Shield, Swords, Zap, Goal, UnfoldVertical, Pin, GitFork, Windmill } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -27,13 +27,7 @@ const strategies = [
     icon: <Shield className="size-10 text-primary" />,
     href: '#'
   },
-   {
-    name: 'Patrones de Jaque Mate',
-    description: 'El objetivo final del ajedrez. Aprende diferentes patrones para dar el golpe de gracia.',
-    icon: <Swords className="size-10 text-primary" />,
-    href: '#'
-  },
-    {
+  {
     name: 'Estrategia General',
     description: 'Conceptos clave como el control del centro, desarrollo de piezas y estructura de peones.',
     icon: <BrainCircuit className="size-10 text-primary" />,
@@ -41,8 +35,50 @@ const strategies = [
   },
   {
     name: 'Enroque',
-    description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental para la seguridad y la coordinación.',
+    description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental para la seguridad.',
     icon: <Castle className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'La Clavada',
+    description: 'Inmovilizar una pieza enemiga porque si se mueve, expondría a otra pieza más valiosa.',
+    icon: <Pin className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'La Horquilla',
+    description: 'Un ataque de una sola pieza a dos o más piezas enemigas simultáneamente. Muy efectivo.',
+    icon: <GitFork className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'Ataque a la Descubierta',
+    description: 'Mover una pieza para desatar un ataque de otra. Una táctica poderosa y a menudo sorprendente.',
+    icon: <UnfoldVertical className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'El Molino',
+    description: 'Una rara pero devastadora táctica que combina jaques a la descubierta repetidos para ganar material.',
+    icon: <Windmill className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'Patrones de Jaque Mate',
+    description: 'El objetivo final del ajedrez. Aprende diferentes patrones para dar el golpe de gracia.',
+    icon: <Swords className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'Jaque Mate de Coz',
+    description: 'Un espectacular mate dado por un caballo cuando el rey enemigo está ahogado por sus propias piezas.',
+    icon: <Zap className="size-10 text-primary" />,
+    href: '#'
+  },
+  {
+    name: 'Jaque del Pasillo',
+    description: 'Un mate común en la octava fila, aprovechando que el rey no puede escapar hacia adelante.',
+    icon: <Goal className="size-10 text-primary" />,
     href: '#'
   },
 ];

@@ -25,7 +25,7 @@ function SearchDialog() {
   const [filteredContent, setFilteredContent] = React.useState<SearchableContent[]>([]);
   const [searchTime, setSearchTime] = React.useState<number | null>(null);
 
-  const popularSearches = ['Aperturas', 'Gambito de Dama', 'Defensa Siciliana', 'Enroque', 'Jaque Mate', 'Estrategia'];
+  const popularSearches = ['Aperturas', 'Gambito de Dama', 'Defensa Siciliana', 'Jaque Mate de Coz', 'La Clavada', 'Estrategia'];
 
   const searchableContent: SearchableContent[] = [
     { title: 'Inicio', path: '/', description: 'Página principal de YiChess. Comienza tu viaje en el ajedrez.', keywords: 'home principal' },
@@ -38,9 +38,15 @@ function SearchDialog() {
     { title: 'Principios de Apertura', path: '/estrategias', description: 'Explora las ideas fundamentales para empezar tus partidas con una sólida ventaja.', keywords: 'estrategia apertura' },
     { title: 'Gambito de Dama', path: '/estrategias', description: 'Una de las aperturas más antiguas y respetadas. Aprende a dominarla.', keywords: 'estrategia apertura' },
     { title: 'Defensa Siciliana', path: '/estrategias', description: 'La respuesta más popular y agresiva contra 1.e4. Descubre sus secretos.', keywords: 'estrategia apertura defensa' },
-    { title: 'Patrones de Jaque Mate', path: '/estrategias', description: 'El objetivo final del ajedrez. Aprende diferentes patrones para dar el golpe de gracia.', keywords: 'estrategia táctica fin de juego' },
     { title: 'Estrategia General', path: '/estrategias', description: 'Conceptos clave como el control del centro, desarrollo de piezas y estructura de peones.', keywords: 'estrategia conceptos' },
-    { title: 'Enroque', path: '/estrategias', description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental para la seguridad y la coordinación.', keywords: 'estrategia movimiento especial rey torre seguridad' },
+    { title: 'Enroque', path: '/estrategias', description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental para la seguridad.', keywords: 'estrategia movimiento especial rey torre seguridad' },
+    { title: 'La Clavada', path: '/estrategias', description: 'Inmovilizar una pieza enemiga porque si se mueve, expondría a otra pieza más valiosa.', keywords: 'estrategia táctica pin' },
+    { title: 'La Horquilla', path: '/estrategias', description: 'Un ataque de una sola pieza a dos o más piezas enemigas simultáneamente. Muy efectivo.', keywords: 'estrategia táctica fork' },
+    { title: 'Ataque a la Descubierta', path: '/estrategias', description: 'Mover una pieza para desatar un ataque de otra. Una táctica poderosa y a menudo sorprendente.', keywords: 'estrategia táctica discovered attack' },
+    { title: 'El Molino', path: '/estrategias', description: 'Una rara pero devastadora táctica que combina jaques a la descubierta repetidos para ganar material.', keywords: 'estrategia táctica windmill' },
+    { title: 'Patrones de Jaque Mate', path: '/estrategias', description: 'El objetivo final del ajedrez. Aprende diferentes patrones para dar el golpe de gracia.', keywords: 'estrategia táctica fin de juego mate' },
+    { title: 'Jaque Mate de Coz', path: '/estrategias', description: 'Un espectacular mate dado por un caballo cuando el rey enemigo está ahogado por sus propias piezas.', keywords: 'estrategia táctica mate ahogado caballo smothered mate' },
+    { title: 'Jaque del Pasillo', path: '/estrategias', description: 'Un mate común en la octava fila, aprovechando que el rey no puede escapar hacia adelante.', keywords: 'estrategia táctica mate pasillo back-rank mate' },
   ];
 
   React.useEffect(() => {
