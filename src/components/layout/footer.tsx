@@ -5,7 +5,7 @@ export function AppFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-gray-100 py-6">
+    <footer className="bg-white border-t border-gray-100 py-6 mt-24">
         <div className="max-w-[1200px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
             <div className="flex items-center gap-4">
                 <Logo className="size-6" />
