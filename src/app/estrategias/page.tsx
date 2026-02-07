@@ -85,7 +85,7 @@ const strategies = [
 
 export default function StrategiesPage() {
   return (
-    <div className="max-w-[1200px] w-full px-10">
+    <div className="max-w-[1200px] w-full px-10 pb-24">
       <AppBreadcrumb />
       <div className='max-w-4xl mx-auto'>
         <header className="text-center mb-16">

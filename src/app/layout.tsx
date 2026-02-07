@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={cn('font-display antialiased')}>
         <div className="relative flex min-h-dvh flex-col bg-white">
           <AppHeader />
-          <main className="flex-1 flex flex-col items-center pb-24">
+          <main className="flex-1 flex flex-col items-center">
             {children}
           </main>
           <AppFooter />
