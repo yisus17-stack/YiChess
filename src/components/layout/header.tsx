@@ -105,6 +105,12 @@ function SearchDialog() {
         </Button>
       </DialogTrigger>
       <DialogContent className="h-full w-full max-w-none rounded-none p-0 sm:p-0 flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+        <DialogHeader className="sr-only">
+          <DialogTitle>Búsqueda</DialogTitle>
+          <DialogDescription>
+            Busca en todo el contenido de YiChess. Escribe un término para empezar.
+          </DialogDescription>
+        </DialogHeader>
         <div className="flex items-center border-b px-4 sm:px-10 h-20 shrink-0">
             <div className="flex items-center w-full max-w-screen-lg mx-auto">
                 <Search className="mr-3 h-5 w-5 shrink-0 opacity-50" />
