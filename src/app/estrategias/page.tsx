@@ -8,106 +8,149 @@ export const metadata: Metadata = {
   description: 'Descubre estrategias y tácticas de ajedrez, desde aperturas hasta jaque mate.',
 };
 
-const strategies = [
+// Section 1: Openings
+const openings = [
   {
     name: 'Principios de Apertura',
-    description: 'Explora las ideas fundamentales para empezar tus partidas con una sólida ventaja.',
-    icon: <BookOpen className="size-10 text-primary" />,
+    description: 'Controla el centro y desarrolla tus piezas para una sólida ventaja inicial.',
+    icon: <BookOpen className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Gambito de Dama',
-    description: 'Una de las aperturas más antiguas y respetadas. Aprende a dominarla.',
-    icon: <Crown className="size-10 text-primary" />,
+    description: 'Una apertura clásica y respetada que busca el control posicional.',
+    icon: <Crown className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Defensa Siciliana',
-    description: 'La respuesta más popular y agresiva contra 1.e4. Descubre sus secretos.',
-    icon: <Shield className="size-10 text-primary" />,
-    href: '#'
-  },
-  {
-    name: 'Estrategia General',
-    description: 'Conceptos clave como el control del centro, desarrollo de piezas y estructura de peones.',
-    icon: <BrainCircuit className="size-10 text-primary" />,
+    description: 'La respuesta más popular y agresiva contra 1.e4. Lucha por la iniciativa.',
+    icon: <Shield className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Enroque',
-    description: 'Un movimiento especial para proteger a tu rey y activar tu torre. Es fundamental para la seguridad.',
-    icon: <Castle className="size-10 text-primary" />,
+    description: 'Un movimiento esencial para proteger a tu rey y conectar tus torres.',
+    icon: <Castle className="size-8 text-primary" />,
+    href: '#'
+  },
+];
+
+// Section 2: Tactics
+const tactics = [
+  {
+    name: 'La Clavada (Pin)',
+    description: 'Inmoviliza una pieza enemiga para restringir su movimiento y crear amenazas.',
+    icon: <Pin className="size-8 text-primary" />,
     href: '#'
   },
   {
-    name: 'La Clavada',
-    description: 'Inmovilizar una pieza enemiga porque si se mueve, expondría a otra pieza más valiosa.',
-    icon: <Pin className="size-10 text-primary" />,
-    href: '#'
-  },
-  {
-    name: 'La Horquilla',
-    description: 'Un ataque de una sola pieza a dos o más piezas enemigas simultáneamente. Muy efectivo.',
-    icon: <GitFork className="size-10 text-primary" />,
+    name: 'La Horquilla (Fork)',
+    description: 'Ataca dos o más piezas enemigas simultáneamente con una sola pieza.',
+    icon: <GitFork className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Ataque a la Descubierta',
-    description: 'Mover una pieza para desatar un ataque de otra. Una táctica poderosa y a menudo sorprendente.',
-    icon: <UnfoldVertical className="size-10 text-primary" />,
+    description: 'Mueve una pieza para desatar un ataque oculto de una pieza poderosa.',
+    icon: <UnfoldVertical className="size-8 text-primary" />,
     href: '#'
   },
   {
-    name: 'El Molino',
-    description: 'Una rara pero devastadora táctica que combina jaques a la descubierta repetidos para ganar material.',
-    icon: <Wind className="size-10 text-primary" />,
+    name: 'El Molino (Windmill)',
+    description: 'Una rara pero devastadora táctica que combina jaques a la descubierta repetidos.',
+    icon: <Wind className="size-8 text-primary" />,
+    href: '#'
+  },
+];
+
+// Section 3: Strategy & Mates
+const strategyAndMates = [
+  {
+    name: 'Estrategia General',
+    description: 'Aprende a crear planes a largo plazo, controlar el tablero y coordinar tus piezas.',
+    icon: <BrainCircuit className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Patrones de Jaque Mate',
-    description: 'El objetivo final del ajedrez. Aprende diferentes patrones para dar el golpe de gracia.',
-    icon: <Swords className="size-10 text-primary" />,
+    description: 'Aprende las secuencias finales para dar el golpe de gracia a tu oponente.',
+    icon: <Swords className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Jaque Mate de Coz',
-    description: 'Un espectacular mate dado por un caballo cuando el rey enemigo está ahogado por sus propias piezas.',
-    icon: <Zap className="size-10 text-primary" />,
+    description: 'Un mate espectacular dado por un caballo cuando el rey está ahogado.',
+    icon: <Zap className="size-8 text-primary" />,
     href: '#'
   },
   {
     name: 'Jaque del Pasillo',
-    description: 'Un mate común en la octava fila, aprovechando que el rey no puede escapar hacia adelante.',
-    icon: <Goal className="size-10 text-primary" />,
+    description: 'Un mate común en la última fila, atrapando al rey sin escapatoria.',
+    icon: <Goal className="size-8 text-primary" />,
     href: '#'
   },
 ];
+
+const StrategyCard = ({ name, description, icon, href }: { name: string, description: string, icon: React.ReactNode, href: string }) => (
+  <Link href={href} className="block h-full">
+    <div className="group bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 flex items-start gap-5">
+      <div className="bg-primary/5 border border-primary/10 rounded-lg p-3 shrink-0">
+        {icon}
+      </div>
+      <div className="flex flex-col">
+        <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+      </div>
+    </div>
+  </Link>
+);
+
 
 export default function StrategiesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10 pb-24">
       <AppBreadcrumb />
-      <div className='max-w-4xl mx-auto'>
-        <header className="text-center mb-16">
-            <h1 className="text-[#1a1a1a] dark:text-white text-5xl font-extrabold leading-tight tracking-tight mb-6">Estrategias y Tácticas</h1>
-            <p className="text-gray-600 dark:text-gray-400 text-lg font-light leading-relaxed max-w-2xl mx-auto">
-                Domina el tablero aprendiendo desde las aperturas fundamentales hasta las tácticas de jaque mate más letales.
+      <div className='max-w-5xl mx-auto'>
+        <header className="text-center mb-20">
+            <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Domina el Arte del Ajedrez</h1>
+            <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
+                Explora los conceptos fundamentales, desde las aperturas más sólidas hasta las tácticas más letales. Cada lección te acerca a la maestría del tablero.
             </p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {strategies.map((strategy) => (
-            <Link href={strategy.href} key={strategy.name}>
-              <div className="group bg-white dark:bg-card border border-gray-100 dark:border-border rounded-xl p-8 h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                <div className="mb-6">
-                  {strategy.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{strategy.name}</h3>
-                <p className="text-gray-500 dark:text-muted-foreground text-sm leading-relaxed">{strategy.description}</p>
+        <div className="space-y-20">
+            <section>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Aperturas y Desarrollo</h2>
+              <p className="text-muted-foreground mb-8 max-w-2xl">Los primeros movimientos son cruciales. Aprende a construir una base sólida para tus partidas y a tomar el control desde el inicio.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {openings.map((strategy) => (
+                  <StrategyCard key={strategy.name} {...strategy} />
+                ))}
               </div>
-            </Link>
-          ))}
+            </section>
+
+            <section>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Tácticas Fundamentales</h2>
+              <p className="text-muted-foreground mb-8 max-w-2xl">La táctica decide la mayoría de las partidas. Aprende a crear oportunidades, a explotar las debilidades de tu oponente y a ganar material.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {tactics.map((strategy) => (
+                  <StrategyCard key={strategy.name} {...strategy} />
+                ))}
+              </div>
+            </section>
+            
+            <section>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Estrategia y Jaque Mate</h2>
+              <p className="text-muted-foreground mb-8 max-w-2xl">Piensa a largo plazo y finaliza la partida. Reconoce y ejecuta los mates ganadores para asegurar la victoria.</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {strategyAndMates.map((strategy) => (
+                  <StrategyCard key={strategy.name} {...strategy} />
+                ))}
+              </div>
+            </section>
         </div>
+
       </div>
     </div>
   );
