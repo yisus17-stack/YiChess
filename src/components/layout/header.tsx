@@ -156,7 +156,7 @@ function SearchDialog() {
                       </div>
                       <div className="space-y-3 mt-4">
                           {filteredContent.map(item => (
-                            <Link href={item.path} key={item.path} className="block group" onClick={handleLinkClick}>
+                            <Link href={item.path} key={item.title} className="block group" onClick={handleLinkClick}>
                                 <div className="p-4 bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800/50 transition-colors">
                                   <div className="flex flex-row items-center justify-between">
                                       <div>
