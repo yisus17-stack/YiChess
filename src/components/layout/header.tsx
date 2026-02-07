@@ -25,6 +25,8 @@ function SearchDialog() {
   const [filteredContent, setFilteredContent] = React.useState<SearchableContent[]>([]);
   const [searchTime, setSearchTime] = React.useState<number | null>(null);
 
+  const popularSearches = ['Aperturas', 'Gambito de Dama', 'Defensa Siciliana', 'Enroque', 'Jaque Mate', 'Estrategia'];
+
   const searchableContent: SearchableContent[] = [
     { title: 'Inicio', path: '/', description: 'Página principal de YiChess. Comienza tu viaje en el ajedrez.', keywords: 'home principal' },
     { title: 'Jugar', path: '/jugar', description: 'Juega partidas de ajedrez contra la IA. Pon a prueba tus habilidades.', keywords: 'partida ia computadora' },
@@ -36,9 +38,11 @@ function SearchDialog() {
 
   React.useEffect(() => {
     if (!open) {
-      setSearchTerm('');
-      setFilteredContent([]);
-      setSearchTime(null);
+      setTimeout(() => {
+        setSearchTerm('');
+        setFilteredContent([]);
+        setSearchTime(null);
+      }, 200); // Delay to allow fade-out animation
       return;
     }
 
@@ -100,28 +104,39 @@ function SearchDialog() {
           <Search className="h-5 w-5" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[625px] p-0 gap-0">
-        <DialogHeader className="sr-only">
-          <DialogTitle>Buscar</DialogTitle>
-          <DialogDescription>
-            Usa el cuadro de texto para buscar contenido en YiChess.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex items-center border-b px-4">
-            <Search className="mr-3 h-5 w-5 shrink-0 opacity-50" />
-            <Input
-                type="search"
-                placeholder="Busca en YiChess..."
-                className="h-14 w-full rounded-md bg-transparent py-3 pl-0 pr-4 text-base outline-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
+      <DialogContent className="h-full w-full max-w-none rounded-none p-0 sm:p-0 flex flex-col data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+        <div className="flex items-center border-b px-4 sm:px-10 h-20 shrink-0">
+            <div className="flex items-center w-full max-w-screen-lg mx-auto">
+                <Search className="mr-3 h-5 w-5 shrink-0 opacity-50" />
+                <Input
+                    type="search"
+                    placeholder="Busca en YiChess..."
+                    className="h-14 w-full bg-gray-100 dark:bg-gray-800 border-transparent rounded-full py-3 px-6 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button variant="ghost" onClick={() => setOpen(false)} className="ml-4 text-base">
+                    Cancelar
+                </Button>
+            </div>
         </div>
-        <div className="p-6 overflow-auto max-h-[400px]">
-            {searchTerm.trim() !== '' ? (
+        <div className="p-6 sm:p-10 overflow-auto">
+            <div className="w-full max-w-screen-lg mx-auto">
+            {searchTerm.trim() === '' ? (
+                <div className="animate-in fade-in-50 duration-300">
+                    <h3 className="text-sm font-medium text-gray-500 mb-4">Términos de búsqueda populares</h3>
+                    <div className="flex flex-wrap gap-3">
+                        {popularSearches.map(term => (
+                            <Button key={term} variant="secondary" className="rounded-full font-medium" onClick={() => setSearchTerm(term)}>
+                                {term}
+                            </Button>
+                        ))}
+                    </div>
+                </div>
+            ) : (
               <>
                 {filteredContent.length > 0 ? (
-                  <div className="space-y-4">
+                  <div className="space-y-4 animate-in fade-in-50 duration-300">
                       <div className="text-xs text-gray-500 dark:text-gray-400 flex justify-between">
                         <span>{filteredContent.length} {filteredContent.length === 1 ? 'resultado' : 'resultados'}</span>
                         {searchTime !== null && <span>en {searchTime.toFixed(2)} ms</span>}
@@ -147,19 +162,14 @@ function SearchDialog() {
                       </div>
                   </div>
                 ) : (
-                  <div className="text-center py-10 h-full flex flex-col items-center justify-center">
+                  <div className="text-center py-10 h-full flex flex-col items-center justify-center animate-in fade-in-50 duration-300">
                     <p className="text-gray-600 dark:text-gray-400 font-semibold">No se encontraron resultados para "{searchTerm}".</p>
                     <p className="text-sm text-gray-500 mt-2">Intenta con una búsqueda diferente o con términos más generales.</p>
                   </div>
                 )}
               </>
-            ) : (
-              <div className="text-center py-10 h-full flex items-center justify-center">
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Encuentra cualquier cosa en YiChess.
-                  </p>
-              </div>
             )}
+            </div>
         </div>
       </DialogContent>
     </Dialog>
