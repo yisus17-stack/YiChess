@@ -105,9 +105,9 @@ function SearchDialog() {
         </Button>
       </DialogTrigger>
       <DialogContent className="w-full max-w-none rounded-none p-0 flex flex-col top-0 translate-y-0 h-[40vh] rounded-b-2xl data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top">
-        <DialogHeader className="sr-only">
-          <DialogTitle>Búsqueda</DialogTitle>
-          <DialogDescription>
+        <DialogHeader>
+          <DialogTitle className="sr-only">Búsqueda</DialogTitle>
+          <DialogDescription className="sr-only">
             Busca en todo el contenido de YiChess. Escribe un término para empezar.
           </DialogDescription>
         </DialogHeader>
@@ -117,7 +117,7 @@ function SearchDialog() {
                 <Input
                     type="search"
                     placeholder="Busca en YiChess..."
-                    className="h-14 w-full bg-gray-100 dark:bg-gray-800 border-transparent rounded-full py-3 px-6 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0"
+                    className="h-14 w-full bg-gray-100 dark:bg-gray-800 border-transparent rounded-full py-3 px-6 text-base outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
