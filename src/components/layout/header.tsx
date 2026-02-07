@@ -7,7 +7,7 @@ import { Menu, Search, ArrowRight } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import {
   Dialog,
   DialogContent,
@@ -156,6 +156,12 @@ export function AppHeader() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px]">
+                            <SheetHeader className="sr-only">
+                              <SheetTitle>Menú móvil</SheetTitle>
+                              <SheetDescription>
+                                Enlaces de navegación principales para el sitio web de YiChess.
+                              </SheetDescription>
+                            </SheetHeader>
                             <div className="p-4">
                                 <Link href="/" className="flex items-center gap-4 mb-8" onClick={() => setIsOpen(false)}>
                                     <Logo />
