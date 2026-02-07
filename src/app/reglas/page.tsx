@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import type { ChessPiece } from '@/lib/definitions';
 
@@ -39,7 +39,7 @@ export default function RulesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10">
       <AppBreadcrumb />
-      <div className='max-w-3xl mx-auto'>
+      <div className='max-w-4xl mx-auto'>
         <header className="text-center mb-12">
             <h1 className="text-[#1a1a1a] dark:text-white text-5xl font-extrabold leading-tight tracking-tight mb-6">Reglas del Ajedrez</h1>
             <p className="text-gray-600 dark:text-gray-400 text-lg font-light leading-relaxed max-w-xl mx-auto">
@@ -47,35 +47,27 @@ export default function RulesPage() {
             </p>
         </header>
 
-        <div className="bg-white dark:bg-card border border-gray-100 dark:border-border rounded-2xl p-4 md:p-8 shadow-sm">
-            <Accordion type="single" collapsible className="w-full">
-                {chessPieces.map((piece, index) => (
-                    <AccordionItem value={`item-${index}`} key={piece.name} className={index === chessPieces.length - 1 ? 'border-b-0' : ''}>
-                        <AccordionTrigger className="text-lg font-bold hover:no-underline">
-                            {piece.name}
-                        </AccordionTrigger>
-                        <AccordionContent className="pt-4">
-                            <div className="flex flex-col md:flex-row gap-8">
-                                <div className="md:w-1/3">
-                                     <Image
-                                        src={piece.imageUrl}
-                                        alt={`Imagen de la pieza de ajedrez: ${piece.name}`}
-                                        width={600}
-                                        height={400}
-                                        data-ai-hint={piece.imageHint}
-                                        className="rounded-lg object-cover aspect-[4/3] shadow-md"
-                                    />
-                                </div>
-                                <div className="md:w-2/3">
-                                    <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        {piece.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </AccordionContent>
-                    </AccordionItem>
-                ))}
-            </Accordion>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {chessPieces.map((piece) => (
+                <Card key={piece.name} className="flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-card shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <CardHeader>
+                        <CardTitle>{piece.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow flex flex-col justify-between p-6 pt-0">
+                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                            {piece.description}
+                        </p>
+                        <Image
+                            src={piece.imageUrl}
+                            alt={`Imagen de la pieza de ajedrez: ${piece.name}`}
+                            width={600}
+                            height={400}
+                            data-ai-hint={piece.imageHint}
+                            className="rounded-lg object-cover aspect-[4/3] w-full shadow-md mt-auto"
+                        />
+                    </CardContent>
+                </Card>
+            ))}
         </div>
       </div>
     </div>
