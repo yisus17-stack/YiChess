@@ -38,6 +38,7 @@ export default function HomePage() {
                   src="/chessin-hero.png"
                   width={480}
                   height={480}
+                  priority
                 />
               </div>
             </div>
@@ -46,7 +47,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="max-w-[1200px] w-full mx-auto px-10 pb-24">
+      <div className="max-w-[1200px] w-full mx-auto px-10">
         <div className="bg-primary rounded-3xl p-16 text-center flex flex-col items-center gap-10 shadow-2xl relative overflow-hidden">
           <div className="absolute -right-10 -bottom-10 opacity-5">
             <span className="material-symbols-outlined text-[300px] text-white">chess</span>
@@ -67,8 +68,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
-
     </>
   );
 }

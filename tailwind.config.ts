@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Lexend', 'sans-serif'],
+        display: ['var(--font-lexend)', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',
