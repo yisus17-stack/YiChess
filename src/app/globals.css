@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @keyframes fadeInSoft {
   0% {
     opacity: 0;
