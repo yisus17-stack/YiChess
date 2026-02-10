@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { Logo } from '@/components/logo';
 
 export const metadata: Metadata = {
   title: 'Inicio | YiChess',
@@ -50,7 +51,7 @@ export default function HomePage() {
       <div className="max-w-[1200px] w-full mx-auto px-10">
         <div className="bg-primary rounded-3xl p-16 text-center flex flex-col items-center gap-10 shadow-2xl relative overflow-hidden">
           <div className="absolute -right-10 -bottom-10 opacity-5">
-            <span className="material-symbols-outlined text-[300px] text-white">chess</span>
+            <Logo className="text-white size-[300px]" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight z-10">
             Comienza con YiChess Hoy Mismo
