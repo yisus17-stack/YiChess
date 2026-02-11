@@ -84,7 +84,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
 const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className="relative w-full h-full p-16">
+        <div className="relative w-full h-full p-8">
             {isLoading && <Skeleton className="absolute inset-0 size-full rounded-xl" />}
             <Image
                 src={piece.imageUrl}
@@ -104,12 +104,7 @@ const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
 export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     return (
         <Tabs defaultValue={pieces[0].name} className="w-full">
-            {pieces.map((piece) => (
-                <TabsContent key={piece.name} value={piece.name} className="mt-0">
-                    <PieceInfoCard {...piece} />
-                </TabsContent>
-            ))}
-            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4 mt-8">
+            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4">
                 {pieces.map((piece) => (
                     <TabsTrigger 
                         key={piece.name} 
@@ -120,6 +115,11 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
                     </TabsTrigger>
                 ))}
             </TabsList>
+            {pieces.map((piece) => (
+                <TabsContent key={piece.name} value={piece.name} className="mt-8">
+                    <PieceInfoCard {...piece} />
+                </TabsContent>
+            ))}
         </Tabs>
     );
 }
