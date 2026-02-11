@@ -22,11 +22,11 @@ export default function HomePage() {
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
               </p>
               <div className="flex gap-4">
-                <Link href="/jugar">
-                  <button className="bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all" >Empezar ahora</button>
+                <Link href="/jugar" className="inline-block bg-primary text-white px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
+                  Empezar ahora
                 </Link>
-                <Link href="/reglas">
-                  <button className="border border-gray-200 text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">Ver reglas</button>
+                <Link href="/reglas" className="inline-block border border-gray-200 text-primary px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">
+                  Ver reglas
                 </Link>
               </div>
             </div>
@@ -66,10 +66,10 @@ export default function HomePage() {
             Mejora tus habilidades de ajedrez con YiChess.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 z-10">
-            <Link href="/jugar" className="bg-white text-black font-black py-5 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
+            <Link href="/jugar" className="bg-white text-black font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
               Empezar a jugar
             </Link>
-            <Link href="/reglas" className="bg-transparent border border-gray-700 text-white font-bold py-5 px-12 rounded-xl hover:bg-gray-800 transition-all text-sm uppercase tracking-[0.2em]">
+            <Link href="/reglas" className="bg-transparent border border-gray-700 text-white font-bold py-6 px-12 rounded-xl hover:bg-gray-800 transition-all text-sm uppercase tracking-[0.2em]">
               Explorar Reglas
             </Link>
           </div>
