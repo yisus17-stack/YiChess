@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 };
 
 const pieceImagesData = [
-    { id: 'king', name: 'El Rey' },
-    { id: 'queen', name: 'La Dama' },
-    { id: 'rook', name: 'La Torre' },
-    { id: 'bishop', name: 'El Alfil' },
-    { id: 'knight', name: 'El Caballo' },
-    { id: 'pawn', name: 'El Peón' },
+    { id: 'rey', name: 'Rey' },
+    { id: 'dama', name: 'Dama' },
+    { id: 'torre', name: 'Torre' },
+    { id: 'alfil', name: 'Alfil' },
+    { id: 'caballo', name: 'Caballo' },
+    { id: 'peon', name: 'Peón' },
   ].map(piece => ({
     ...piece,
     imageUrl: `/${piece.id}.png`,
