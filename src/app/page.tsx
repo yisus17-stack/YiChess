@@ -30,7 +30,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-8 md:mt-0">
+            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-12 md:mt-0 pb-12">
               <div className="animate-fadeInSoft">
                 <Image
                   alt="YiChess Pro"
@@ -59,10 +59,10 @@ export default function HomePage() {
               ></path>
             </svg>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight z-10">
+          <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight z-10">
             Comienza con YiChess Hoy Mismo
           </h1>
-          <p className="text-gray-300 text-lg font-light max-w-2xl z-10 leading-relaxed">
+          <p className="text-gray-300 text-base font-light max-w-2xl z-10 leading-relaxed">
             Mejora tus habilidades de ajedrez con YiChess.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 z-10">
