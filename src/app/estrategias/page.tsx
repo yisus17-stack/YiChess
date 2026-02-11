@@ -93,18 +93,21 @@ const strategyAndMates = [
 ];
 
 const StrategyCard = ({ name, description, icon, href }: { name: string, description: string, icon: React.ReactNode, href: string }) => (
-  <Link href={href} className="block h-full">
-    <div className="group bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 flex items-start gap-5">
-      <div className="bg-primary/5 border border-primary/10 rounded-lg p-3 shrink-0">
-        {icon}
+    <Link href={href} className="block h-full">
+      <div className="group relative bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 flex items-start gap-5 overflow-hidden">
+        <span className="absolute -bottom-2 -right-1 text-[100px] font-black text-foreground/5 select-none z-0">
+          {name.charAt(0).toUpperCase()}
+        </span>
+        <div className="bg-primary/5 border border-primary/10 rounded-lg p-3 shrink-0 z-10">
+          {icon}
+        </div>
+        <div className="flex flex-col z-10">
+          <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
+          <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+        </div>
       </div>
-      <div className="flex flex-col">
-        <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
-        <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
-      </div>
-    </div>
-  </Link>
-);
+    </Link>
+  );
 
 
 export default function StrategiesPage() {
