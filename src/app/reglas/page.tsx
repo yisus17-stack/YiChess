@@ -118,6 +118,12 @@ export default function RulesPage() {
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
         <div className='max-w-6xl mx-auto py-12'>
+            <header className="text-center mb-12">
+                <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Movimiento de las Piezas</h1>
+                <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
+                    Cada pieza en el ajedrez tiene un movimiento único. Conoce cómo se desplaza cada una por el tablero y cuál es su valor estratégico.
+                </p>
+            </header>
             <RulesPiecesTabs pieces={pieces} />
 
             <section className="mt-20">
