@@ -7,44 +7,42 @@ export const metadata: Metadata = {
   description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y los conceptos fundamentales para empezar a jugar.',
 };
 
-const pieceImagesData = [
-    { id: 'rey', name: 'Rey' },
-    { id: 'dama', name: 'Dama' },
-    { id: 'torre', name: 'Torre' },
-    { id: 'alfil', name: 'Alfil' },
-    { id: 'caballo', name: 'Caballo' },
-    { id: 'peon', name: 'Peón' },
-  ].map(piece => ({
-    ...piece,
-    imageUrl: `/${piece.id}.png`,
-    imageHint: `${piece.id} chess`,
-  }));
-
-
-const pieces: { name: string; description: string; }[] = [
+const pieces: { name: string; description: string; value: string | number; imageUrl: string; }[] = [
     {
         name: 'El Rey',
         description: 'La pieza más importante. Solo se mueve una casilla en cualquier dirección. Si está en jaque y no puede moverse, es jaque mate.',
+        value: '∞',
+        imageUrl: '/rey.png'
     },
     {
         name: 'La Dama',
         description: 'La pieza más poderosa. Se mueve cualquier número de casillas en línea recta: horizontal, vertical o diagonalmente.',
+        value: 9,
+        imageUrl: '/dama.png'
     },
     {
         name: 'La Torre',
         description: 'Se mueve cualquier número de casillas horizontal o verticalmente. Es una pieza poderosa en filas y columnas abiertas.',
+        value: 5,
+        imageUrl: '/torre.png'
     },
     {
         name: 'El Alfil',
         description: 'Se mueve cualquier número de casillas en diagonal. Cada jugador tiene un alfil que se mueve en casillas claras y otro en oscuras.',
+        value: 3,
+        imageUrl: '/alfil.png'
     },
     {
         name: 'El Caballo',
         description: 'Se mueve en forma de "L": dos casillas en una dirección y luego una en perpendicular. Es la única pieza que puede saltar sobre otras.',
+        value: 3,
+        imageUrl: '/caballo.png'
     },
     {
         name: 'El Peón',
         description: 'Avanza una casilla, pero dos en su primer movimiento. Captura en diagonal. Puede coronar y convertirse en otra pieza.',
+        value: 1,
+        imageUrl: '/peon.png'
     },
 ];
 
@@ -72,6 +70,29 @@ const RuleStep = ({ title, description, index, isLast }: { title: string, descri
     </div>
 );
 
+const PieceInfoCard = ({ name, description, value, imageUrl }: { name: string; description: string; value: string | number; imageUrl: string; }) => (
+    <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+        <div className="flex flex-col md:flex-row">
+            <div className="flex-1 p-8">
+                <div className="flex items-baseline gap-4 mb-4">
+                    <h3 className="text-3xl font-extrabold text-foreground">{name}</h3>
+                    <span className="bg-primary/10 text-primary font-bold text-sm px-3 py-1 rounded-full">{value} Puntos</span>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">{description}</p>
+            </div>
+            <div className="bg-muted/50 md:w-1/3 flex items-center justify-center p-6 md:p-8">
+                <Image
+                    src={imageUrl}
+                    alt={`Pieza de ajedrez: ${name}`}
+                    width={120}
+                    height={120}
+                    className="object-contain drop-shadow-lg"
+                />
+            </div>
+        </div>
+    </div>
+);
+
 
 export default function RulesPage() {
   return (
@@ -86,39 +107,11 @@ export default function RulesPage() {
             </header>
 
             <div className="space-y-20">
-
                 <section>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10 text-center">Conoce las Piezas</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10">
-                        {pieceImagesData.map((piece) => (
-                            <div key={piece.id} className="flex flex-col items-center text-center group">
-                                <div className="bg-card p-4 rounded-2xl border border-border group-hover:border-primary/20 group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 w-full aspect-square flex items-center justify-center">
-                                    <Image
-                                        src={piece.imageUrl!}
-                                        alt={`Pieza de ajedrez: ${piece.name}`}
-                                        width={120}
-                                        height={120}
-                                        className="object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
-                                        data-ai-hint={piece.imageHint}
-                                    />
-                                </div>
-                                <h3 className="mt-4 font-bold text-lg text-foreground group-hover:text-primary transition-colors">{piece.name}</h3>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                <section>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Movimiento de las Piezas</h2>
-                    <div className="flex flex-col">
-                        {pieces.map((piece, index) => (
-                            <RuleStep 
-                                key={piece.name} 
-                                title={piece.name} 
-                                description={piece.description} 
-                                index={index}
-                                isLast={index === pieces.length - 1}
-                            />
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Movimiento y Valor de las Piezas</h2>
+                    <div className="space-y-6">
+                        {pieces.map((piece) => (
+                            <PieceInfoCard key={piece.name} {...piece} />
                         ))}
                     </div>
                 </section>
