@@ -19,19 +19,19 @@ type Piece = {
 };
 
 const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
-    <div className="bg-card border border-border/50 rounded-2xl h-full flex flex-col">
+    <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl h-full flex flex-col">
       <div className="flex flex-1 flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 p-8 md:p-12">
         <div className="flex-[2] text-center lg:text-left">
-          <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
+          <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
             {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
           </p>
-          <h3 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
+          <h3 className="text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
             {name}
           </h3>
-          <p className="text-muted-foreground text-lg mb-8">{description}</p>
+          <p className="text-muted-foreground text-lg md:text-xl mb-8">{description}</p>
           <div className="flex gap-4 justify-center lg:justify-start">
-            <Button size="lg">Saber más</Button>
-            <Button size="lg" variant="secondary">
+            <Button size="lg" className='text-base'>Saber más</Button>
+            <Button size="lg" variant="secondary" className='text-base'>
               Ver ejemplos <ArrowRight className="ml-2 size-4" />
             </Button>
           </div>
