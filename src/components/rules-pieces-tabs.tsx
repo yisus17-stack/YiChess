@@ -26,7 +26,7 @@ type Piece = {
 const PieceInfoCard = ({ name, description, value, details }: Piece) => {
     return (
         <Dialog>
-            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl h-full flex flex-col items-center justify-center text-center p-8 md:p-12">
+            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[380px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
                   {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
@@ -84,7 +84,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
 const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full p-4">
             {isLoading && <Skeleton className="absolute inset-0 size-full rounded-xl" />}
             <Image
                 src={piece.imageUrl}
@@ -109,7 +109,7 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
                     <TabsTrigger 
                         key={piece.name} 
                         value={piece.name}
-                        className="p-4 rounded-xl bg-muted/50 data-[state=active]:bg-card data-[state=active]:shadow-lg data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all aspect-square h-auto flex items-center justify-center"
+                        className="p-0 rounded-xl bg-muted/50 data-[state=active]:bg-card data-[state=active]:shadow-lg data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all aspect-square h-auto flex items-center justify-center"
                     >
                         <PieceImageTrigger piece={piece} />
                     </TabsTrigger>
