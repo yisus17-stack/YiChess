@@ -128,7 +128,7 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
                     <TabsTrigger 
                         key={piece.name} 
                         value={piece.name}
-                        className="p-2 md:p-4 rounded-lg bg-muted/50 data-[state=active]:bg-primary/10 data-[state=active]:shadow-md data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all h-auto"
+                        className="p-2 md:p-4 rounded-xl bg-muted/50 data-[state=active]:bg-card data-[state=active]:shadow-lg data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all h-auto"
                     >
                         <PieceImageTrigger piece={piece} />
                     </TabsTrigger>
