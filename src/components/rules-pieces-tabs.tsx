@@ -23,48 +23,29 @@ type Piece = {
     } | null;
 };
 
-const PieceInfoCard = ({ name, description, value, imageUrl, details }: Piece) => {
-    const [isImageLoading, setIsImageLoading] = useState(true);
+const PieceInfoCard = ({ name, description, value, details }: Piece) => {
     return (
         <Dialog>
-            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl h-full flex flex-col">
-              <div className="flex flex-1 flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 p-8 md:p-12">
-                <div className="flex-[2] text-center lg:text-left">
-                  <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
-                    {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
-                  </p>
-                  <h3 className="text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
-                    {name}
-                  </h3>
-                  <p className="text-muted-foreground text-lg md:text-xl mb-8">{description}</p>
-                  <div className="flex gap-4 justify-center lg:justify-start">
-                    {details ? (
-                        <DialogTrigger asChild>
-                            <Button size="lg" className='text-base'>Saber más</Button>
-                        </DialogTrigger>
-                    ) : (
-                        <Button size="lg" className='text-base' disabled>Saber más</Button>
-                    )}
-                    <Button size="lg" variant="outline" className='text-base'>
-                      Ver ejemplos <ArrowRight className="ml-2 size-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="relative w-[200px] h-[200px] flex-shrink-0">
-                    {isImageLoading && (
-                        <Skeleton className="absolute inset-0 size-full rounded-lg" />
-                    )}
-                    <Image
-                        src={imageUrl}
-                        alt={`Pieza de ajedrez: ${name}`}
-                        width={200}
-                        height={200}
-                        className={cn(
-                          "object-contain drop-shadow-2xl transition-opacity duration-300",
-                          isImageLoading ? "opacity-0" : "opacity-100"
-                        )}
-                        onLoad={() => setIsImageLoading(false)}
-                    />
+            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl h-full flex flex-col items-center justify-center text-center p-8 md:p-12">
+              <div className="max-w-xl">
+                <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
+                  {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
+                </p>
+                <h3 className="text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
+                  {name}
+                </h3>
+                <p className="text-muted-foreground text-lg md:text-xl mb-8">{description}</p>
+                <div className="flex gap-4 justify-center">
+                  {details ? (
+                      <DialogTrigger asChild>
+                          <Button size="lg" className='text-base'>Saber más</Button>
+                      </DialogTrigger>
+                  ) : (
+                      <Button size="lg" className='text-base' disabled>Saber más</Button>
+                  )}
+                  <Button size="lg" variant="outline" className='text-base'>
+                    Ver ejemplos <ArrowRight className="ml-2 size-4" />
+                  </Button>
                 </div>
               </div>
             </div>
