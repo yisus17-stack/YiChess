@@ -19,8 +19,8 @@ type Piece = {
 };
 
 const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
-    <div className="bg-card border border-border/50 rounded-2xl">
-      <div className="flex flex-col lg:flex-row items-center gap-8 p-8 md:p-12">
+    <div className="bg-card border border-border/50 rounded-2xl h-full flex flex-col">
+      <div className="flex flex-1 flex-col lg:flex-row items-center gap-8 p-8 md:p-12">
         <div className="flex-1 text-center lg:text-left">
           <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
             {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
@@ -53,6 +53,8 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
     const [api, setApi] = React.useState<CarouselApi>();
     const [current, setCurrent] = React.useState(0);
 
+    const dotCount = pieces.length;
+
     React.useEffect(() => {
         if (!api) {
             return;
@@ -64,8 +66,6 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
             setCurrent(api.selectedScrollSnap() + 1);
         });
     }, [api]);
-
-    const dotCount = pieces.length;
 
     return (
         <section>
