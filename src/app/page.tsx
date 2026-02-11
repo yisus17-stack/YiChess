@@ -30,7 +30,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-12 md:mt-0 pb-12">
+            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-6 md:mt-0 pb-6">
               <div className="animate-fadeInSoft">
                 <Image
                   alt="YiChess Pro"
