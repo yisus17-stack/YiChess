@@ -66,11 +66,11 @@ export default function HomePage() {
             Mejora tus habilidades de ajedrez con YiChess.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 z-10">
-            <Link href="/jugar" className="bg-white text-black font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
-              Empezar a jugar
+            <Link href="/puzzles" className="text-center bg-white text-black font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
+              Resolver Puzzles
             </Link>
-            <Link href="/reglas" className="bg-transparent border border-gray-700 text-white font-bold py-6 px-12 rounded-xl hover:bg-gray-800 transition-all text-sm uppercase tracking-[0.2em]">
-              Explorar Reglas
+            <Link href="/estrategias" className="text-center bg-transparent border border-gray-700 text-white font-bold py-6 px-12 rounded-xl hover:bg-gray-800 transition-all text-sm uppercase tracking-[0.2em]">
+              Aprender Estrategias
             </Link>
           </div>
         </div>
