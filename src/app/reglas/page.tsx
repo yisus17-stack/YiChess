@@ -1,65 +1,42 @@
 import type { Metadata } from 'next';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
-import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import type { ImagePlaceholder } from '@/lib/placeholder-images';
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
   description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y los conceptos fundamentales para empezar a jugar.',
 };
 
-const pieces: { name: string; description: string; imageData: ImagePlaceholder | undefined; }[] = [
+const pieces: { name: string; description: string; }[] = [
     {
         name: 'El Rey',
         description: 'La pieza más importante. Solo se mueve una casilla en cualquier dirección. Si está en jaque y no puede moverse, es jaque mate.',
-        imageData: PlaceHolderImages.find(p => p.id === 'king')
     },
     {
         name: 'La Dama',
         description: 'La pieza más poderosa. Se mueve cualquier número de casillas en línea recta: horizontal, vertical o diagonalmente.',
-        imageData: PlaceHolderImages.find(p => p.id === 'queen')
     },
     {
         name: 'La Torre',
         description: 'Se mueve cualquier número de casillas horizontal o verticalmente. Es una pieza poderosa en filas y columnas abiertas.',
-        imageData: PlaceHolderImages.find(p => p.id === 'rook')
     },
     {
         name: 'El Alfil',
         description: 'Se mueve cualquier número de casillas en diagonal. Cada jugador tiene un alfil que se mueve en casillas claras y otro en oscuras.',
-        imageData: PlaceHolderImages.find(p => p.id === 'bishop')
     },
     {
         name: 'El Caballo',
         description: 'Se mueve en forma de "L": dos casillas en una dirección y luego una en perpendicular. Es la única pieza que puede saltar sobre otras.',
-        imageData: PlaceHolderImages.find(p => p.id === 'knight')
     },
     {
         name: 'El Peón',
         description: 'Avanza una casilla, pero dos en su primer movimiento. Captura en diagonal. Puede coronar y convertirse en otra pieza.',
-        imageData: PlaceHolderImages.find(p => p.id === 'pawn')
     },
 ];
 
-const PieceCard = ({ name, description, imageData }: { name: string, description: string, imageData: ImagePlaceholder | undefined }) => (
-    <div className="group relative bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 flex items-start gap-5 overflow-hidden">
-        {imageData && (
-            <div className="bg-primary/5 border border-primary/10 rounded-lg p-2 shrink-0 z-10 w-16 h-16 flex items-center justify-center">
-                <Image
-                    src={imageData.imageUrl}
-                    alt={imageData.description}
-                    width={48}
-                    height={48}
-                    className="object-contain"
-                    data-ai-hint={imageData.imageHint}
-                />
-            </div>
-        )}
-        <div className="flex flex-col z-10">
-            <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
-        </div>
+const PieceCard = ({ name, description }: { name: string, description: string }) => (
+    <div className="group relative bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1">
+        <h3 className="text-base font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{name}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
     </div>
 );
 
