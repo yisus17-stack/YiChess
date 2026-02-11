@@ -1,6 +1,13 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+  } from "@/components/ui/carousel";
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
@@ -108,12 +115,18 @@ export default function RulesPage() {
 
             <div className="space-y-20">
                 <section>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Movimiento y Valor de las Piezas</h2>
-                    <div className="space-y-6">
-                        {pieces.map((piece) => (
-                            <PieceInfoCard key={piece.name} {...piece} />
-                        ))}
-                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10 text-center">Movimiento y Valor de las Piezas</h2>
+                    <Carousel className="w-full" opts={{ loop: true }}>
+                        <CarouselContent>
+                            {pieces.map((piece) => (
+                                <CarouselItem key={piece.name}>
+                                    <PieceInfoCard {...piece} />
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                    </Carousel>
                 </section>
 
                 <section>
