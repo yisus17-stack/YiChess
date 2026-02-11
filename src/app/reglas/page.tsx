@@ -34,17 +34,16 @@ const pieces: { name: string; description: string; }[] = [
 ];
 
 const PieceCard = ({ name, description }: { name: string, description: string }) => (
-    <div className="bg-card border border-border rounded-xl h-full transition-all duration-300 shadow-sm hover:shadow-lg hover:border-primary/40 relative overflow-hidden p-6 pl-10">
-        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
-        <h3 className="text-base font-bold text-primary mb-2">{name}</h3>
+    <div className="group bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1">
+        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{name}</h3>
         <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
     </div>
 );
 
 
 const ConceptCard = ({ title, description }: { title: string, description: string }) => (
-  <div className="bg-card border border-border rounded-2xl p-6 h-full">
-    <h3 className="font-bold text-foreground mb-2">{title}</h3>
+  <div className="group bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1">
+    <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{title}</h3>
     <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
   </div>
 );
