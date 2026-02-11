@@ -117,7 +117,7 @@ export default function RulesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
-        <div className='max-w-6xl mx-auto py-12'>
+        <div className='max-w-6xl mx-auto'>
             <RulesPiecesTabs pieces={pieces} />
 
             <section className="mt-20">
