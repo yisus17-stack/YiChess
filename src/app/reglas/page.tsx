@@ -44,9 +44,6 @@ const pieces: { name: string; description: string; imageData: ImagePlaceholder |
 
 const PieceCard = ({ name, description, imageData }: { name: string, description: string, imageData: ImagePlaceholder | undefined }) => (
     <div className="group relative bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1 flex items-start gap-5 overflow-hidden">
-        <span className="absolute -bottom-2 -right-1 text-[100px] font-black text-foreground/5 select-none z-0">
-            {name.split(' ')[1]?.charAt(0).toUpperCase()}
-        </span>
         {imageData && (
             <div className="bg-primary/5 border border-primary/10 rounded-lg p-2 shrink-0 z-10 w-16 h-16 flex items-center justify-center">
                 <Image
