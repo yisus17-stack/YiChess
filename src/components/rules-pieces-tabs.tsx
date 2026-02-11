@@ -103,13 +103,13 @@ const PieceInfoCard = ({ name, description, value, imageUrl, details }: Piece) =
 const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className="relative w-20 h-20 md:w-24 md:h-24">
-            {isLoading && <Skeleton className="absolute inset-0 size-full rounded-md" />}
+        <div className="relative w-full h-full">
+            {isLoading && <Skeleton className="absolute inset-0 size-full rounded-xl" />}
             <Image
                 src={piece.imageUrl}
                 alt={piece.name}
-                width={96}
-                height={96}
+                fill
+                sizes="(max-width: 768px) 20vw, 10vw"
                 className={cn(
                     "object-contain transition-opacity duration-300",
                     isLoading ? "opacity-0" : "opacity-100"
@@ -128,7 +128,7 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
                     <TabsTrigger 
                         key={piece.name} 
                         value={piece.name}
-                        className="p-2 md:p-4 rounded-xl bg-muted/50 data-[state=active]:bg-card data-[state=active]:shadow-lg data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all h-auto"
+                        className="p-4 rounded-xl bg-muted/50 data-[state=active]:bg-card data-[state=active]:shadow-lg data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all aspect-square h-auto flex items-center justify-center"
                     >
                         <PieceImageTrigger piece={piece} />
                     </TabsTrigger>
