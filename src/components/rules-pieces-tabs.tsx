@@ -29,7 +29,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
             <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 min-h-[420px] md:min-h-[380px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
-                  {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
+                  {value === 1 ? `${value} Punto` : value === '∞' ? `Valor: ${value}` : `${value} Puntos`}
                 </p>
                 <h3 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
                   {name}
@@ -84,7 +84,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
 const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className="relative w-full h-full p-8">
+        <div className="relative w-full h-full p-10">
             {isLoading && <Skeleton className="absolute inset-0 size-full rounded-xl" />}
             <Image
                 src={piece.imageUrl}
@@ -104,7 +104,12 @@ const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
 export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     return (
         <Tabs defaultValue={pieces[0].name} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4">
+            {pieces.map((piece) => (
+                <TabsContent key={piece.name} value={piece.name}>
+                    <PieceInfoCard {...piece} />
+                </TabsContent>
+            ))}
+            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4 mt-8">
                 {pieces.map((piece) => (
                     <TabsTrigger 
                         key={piece.name} 
@@ -115,11 +120,6 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
                     </TabsTrigger>
                 ))}
             </TabsList>
-            {pieces.map((piece) => (
-                <TabsContent key={piece.name} value={piece.name} className="mt-8">
-                    <PieceInfoCard {...piece} />
-                </TabsContent>
-            ))}
         </Tabs>
     );
 }
