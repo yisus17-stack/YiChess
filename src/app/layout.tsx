@@ -30,10 +30,10 @@ export default function RootLayout({
     <html lang="es" className={`${lexend.variable} light`}>
       <head />
       <body className={cn('font-display antialiased')}>
-        <Preloader />
         <div className="relative flex min-h-dvh flex-col bg-background">
           <AppHeader />
-          <main className="flex-1 flex flex-col items-center pb-32">
+          <main className="relative flex-1 flex flex-col items-center pb-32">
+            <Preloader />
             {children}
           </main>
           <AppFooter />
