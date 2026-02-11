@@ -52,20 +52,20 @@ const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
 export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
     const [api, setApi] = React.useState<CarouselApi>();
     const [current, setCurrent] = React.useState(0);
-    const [count, setCount] = React.useState(0);
 
     React.useEffect(() => {
         if (!api) {
             return;
         }
 
-        setCount(api.scrollSnapList().length);
         setCurrent(api.selectedScrollSnap() + 1);
 
         api.on("select", () => {
             setCurrent(api.selectedScrollSnap() + 1);
         });
     }, [api]);
+
+    const dotCount = pieces.length;
 
     return (
         <section>
@@ -80,7 +80,7 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
                 </CarouselContent>
             </Carousel>
             <div className="flex justify-center gap-2 mt-8">
-                {Array.from({ length: count }).map((_, index) => (
+                {Array.from({ length: dotCount }).map((_, index) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
