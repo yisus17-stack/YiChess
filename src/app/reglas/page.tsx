@@ -75,32 +75,23 @@ export default function RulesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
-        <div className='max-w-6xl mx-auto'>
-            <header className="text-center mb-20">
-                <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Reglas Fundamentales del Ajedrez</h1>
-                <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
-                    Comprender las reglas es el primer paso para dominar el juego. Aquí encontrarás todo lo que necesitas para empezar a jugar, desde el movimiento de las piezas hasta el objetivo final.
-                </p>
-            </header>
+        <div className='max-w-6xl mx-auto py-12'>
+            <RulesPiecesCarousel pieces={pieces} />
 
-            <div className="space-y-20">
-                <RulesPiecesCarousel pieces={pieces} />
-
-                <section>
-                  <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Conceptos Clave y Reglas Especiales</h2>
-                  <div className="flex flex-col">
-                    {concepts.map((concept, index) => (
-                        <RuleStep 
-                            key={concept.title}
-                            title={concept.title} 
-                            description={concept.description} 
-                            index={index} 
-                            isLast={index === concepts.length - 1}
-                        />
-                    ))}
-                  </div>
-                </section>
-            </div>
+            <section className="mt-20">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Conceptos Clave y Reglas Especiales</h2>
+              <div className="flex flex-col">
+                {concepts.map((concept, index) => (
+                    <RuleStep 
+                        key={concept.title}
+                        title={concept.title} 
+                        description={concept.description} 
+                        index={index} 
+                        isLast={index === concepts.length - 1}
+                    />
+                ))}
+              </div>
+            </section>
         </div>
     </div>
   );

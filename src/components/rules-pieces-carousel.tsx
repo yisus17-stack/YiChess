@@ -52,7 +52,6 @@ const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
 export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
     const [api, setApi] = React.useState<CarouselApi>();
     const [current, setCurrent] = React.useState(0);
-
     const dotCount = pieces.length;
 
     React.useEffect(() => {
@@ -69,7 +68,6 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
 
     return (
         <section>
-            <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10 text-center">Movimiento y Valor de las Piezas</h2>
             <Carousel className="w-full" setApi={setApi} opts={{ loop: true }}>
                 <CarouselContent>
                     {pieces.map((piece) => (
