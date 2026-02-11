@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
@@ -15,14 +14,11 @@ const pieceImagesData = [
     { id: 'bishop', name: 'El Alfil' },
     { id: 'knight', name: 'El Caballo' },
     { id: 'pawn', name: 'El Peón' },
-  ].map(piece => {
-    const imageData = PlaceHolderImages.find(p => p.id === piece.id);
-    return {
-      ...piece,
-      imageUrl: imageData?.imageUrl,
-      imageHint: imageData?.imageHint,
-    }
-  }).filter(p => p.imageUrl);
+  ].map(piece => ({
+    ...piece,
+    imageUrl: `/${piece.id}.png`,
+    imageHint: `${piece.id} chess`,
+  }));
 
 
 const pieces: { name: string; description: string; }[] = [
