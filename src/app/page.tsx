@@ -11,30 +11,32 @@ export default function HomePage() {
   return (
     <>
       <div className="w-full">
-        <div className="max-w-[1200px] w-full mx-auto px-10 pt-16 md:pt-24 pb-8">
-          <div className="flex flex-col md:flex-row items-center gap-2">
-            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-              <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">Plataforma de Ajedrez</span>
-              <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter mb-8">
+        <div className="max-w-[1200px] w-full mx-auto px-10">
+          <div className="grid md:grid-cols-2 items-center gap-x-8 gap-y-12 py-16 md:py-24">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">
+                Plataforma de Ajedrez
+              </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tighter mb-6">
                 Aprende de ajedrez en <span className="text-primary">YiChess</span>
               </h1>
-              <p className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-lg mb-10">
+              <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-lg mb-8">
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <Link href="/jugar" className="inline-block text-center bg-primary text-white px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
                   Empezar ahora
                 </Link>
-                <Link href="/reglas" className="inline-block text-center border border-gray-200 text-primary px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">
+                <Link href="/reglas" className="inline-block w-full sm:w-auto text-center border border-border text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-accent transition-all">
                   Ver reglas
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-6 md:mt-0 pb-6">
+            <div className="flex items-center justify-center row-start-1 md:row-auto">
               <div className="animate-fadeInSoft">
                 <Image
                   alt="YiChess Pro"
-                  className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
+                  className="w-full max-w-[280px] sm:max-w-xs md:max-w-sm h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
                   src="/chessin-hero.png"
                   width={380}
                   height={380}
@@ -42,8 +44,6 @@ export default function HomePage() {
                 />
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
