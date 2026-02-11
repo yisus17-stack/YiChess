@@ -26,24 +26,24 @@ type Piece = {
 const PieceInfoCard = ({ name, description, value, details }: Piece) => {
     return (
         <Dialog>
-            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-8 md:p-12 min-h-[380px]">
+            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 min-h-[420px] md:min-h-[380px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
                   {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
                 </p>
-                <h3 className="text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
+                <h3 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
                   {name}
                 </h3>
-                <p className="text-muted-foreground text-lg md:text-xl mb-8">{description}</p>
-                <div className="flex gap-4 justify-center">
+                <p className="text-muted-foreground text-base sm:text-lg md:text-xl mb-8">{description}</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   {details ? (
                       <DialogTrigger asChild>
-                          <Button size="lg" className='text-base'>Saber más</Button>
+                          <Button size="lg" className='text-sm sm:text-base w-full sm:w-auto'>Saber más</Button>
                       </DialogTrigger>
                   ) : (
-                      <Button size="lg" className='text-base' disabled>Saber más</Button>
+                      <Button size="lg" className='text-sm sm:text-base w-full sm:w-auto' disabled>Saber más</Button>
                   )}
-                  <Button size="lg" variant="outline" className='text-base'>
+                  <Button size="lg" variant="outline" className='text-sm sm:text-base w-full sm:w-auto'>
                     Ver ejemplos <ArrowRight className="ml-2 size-4" />
                   </Button>
                 </div>
@@ -84,7 +84,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
 const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className="relative w-full h-full p-0">
+        <div className="relative w-full h-full p-16">
             {isLoading && <Skeleton className="absolute inset-0 size-full rounded-xl" />}
             <Image
                 src={piece.imageUrl}
