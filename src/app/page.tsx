@@ -15,7 +15,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center gap-2">
             <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
               <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">Plataforma de Ajedrez</span>
-              <h1 className="text-[#1a1a1a] text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter mb-8">
+              <h1 className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter mb-8">
                 Aprende de ajedrez en <span className="text-primary">YiChess</span>
               </h1>
               <p className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-lg mb-10">
@@ -59,7 +59,7 @@ export default function HomePage() {
               ></path>
             </svg>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-white tracking-tight z-10">
+          <h1 className="text-2xl md:text-5xl font-bold text-white tracking-tight z-10">
             Comienza con YiChess Hoy Mismo
           </h1>
           <p className="text-gray-300 text-base font-light max-w-2xl z-10 leading-relaxed">
