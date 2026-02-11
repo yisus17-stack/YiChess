@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import {
     Carousel,
@@ -20,7 +20,7 @@ type Piece = {
 
 const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
     <div className="bg-card border border-border/50 rounded-2xl h-full flex flex-col">
-      <div className="flex flex-1 flex-col lg:flex-row items-center gap-8 lg:gap-16 p-8 md:p-12">
+      <div className="flex flex-1 flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 p-8 md:p-12">
         <div className="flex-[2] text-center lg:text-left">
           <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
             {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
@@ -28,7 +28,7 @@ const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
           <h3 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
             {name}
           </h3>
-          <p className="text-muted-foreground text-lg mb-8 max-w-md">{description}</p>
+          <p className="text-muted-foreground text-lg mb-8">{description}</p>
           <div className="flex gap-4 justify-center lg:justify-start">
             <Button size="lg">Saber más</Button>
             <Button size="lg" variant="ghost">
@@ -49,6 +49,7 @@ const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
     </div>
 );
 
+
 export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
@@ -59,16 +60,24 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
             return;
         }
 
-        const updateCurrent = () => setCurrent(api.selectedScrollSnap());
+        const updateCurrent = () => {
+            setCurrent(api.selectedScrollSnap());
+        };
         
-        updateCurrent(); // Set initial value
         api.on("select", updateCurrent);
         api.on("reInit", updateCurrent);
+        
+        // Set initial value
+        updateCurrent();
 
         return () => {
-          api.off("select", updateCurrent);
-          api.off("reInit", updateCurrent);
+            api.off("select", updateCurrent);
+            api.off("reInit", updateCurrent);
         }
+    }, [api]);
+
+    const scrollTo = useCallback((index: number) => {
+        api?.scrollTo(index);
     }, [api]);
 
     return (
@@ -76,7 +85,7 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
             <Carousel className="w-full" setApi={setApi} opts={{ loop: true }}>
                 <CarouselContent>
                     {pieces.map((piece) => (
-                        <CarouselItem key={piece.name}>
+                        <CarouselItem key={piece.name} className="flex-grow">
                             <PieceInfoCard {...piece} />
                         </CarouselItem>
                     ))}
@@ -86,7 +95,7 @@ export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
                 {Array.from({ length: dotCount }).map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => api?.scrollTo(index)}
+                    onClick={() => scrollTo(index)}
                     className={`h-2 rounded-full transition-all duration-300 ${current === index ? 'w-6 bg-primary' : 'w-2 bg-muted-foreground/50 hover:bg-muted-foreground'}`}
                     aria-label={`Ir a la diapositiva ${index + 1}`}
                   />
