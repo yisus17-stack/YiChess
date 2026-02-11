@@ -104,7 +104,12 @@ const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
 export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     return (
         <Tabs defaultValue={pieces[0].name} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4 mb-8">
+            {pieces.map((piece) => (
+                <TabsContent key={piece.name} value={piece.name} className="mt-0">
+                    <PieceInfoCard {...piece} />
+                </TabsContent>
+            ))}
+            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4 mt-8">
                 {pieces.map((piece) => (
                     <TabsTrigger 
                         key={piece.name} 
@@ -115,11 +120,6 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
                     </TabsTrigger>
                 ))}
             </TabsList>
-            {pieces.map((piece) => (
-                <TabsContent key={piece.name} value={piece.name}>
-                    <PieceInfoCard {...piece} />
-                </TabsContent>
-            ))}
         </Tabs>
     );
 }
