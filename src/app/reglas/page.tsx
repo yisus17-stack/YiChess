@@ -33,19 +33,25 @@ const pieces: { name: string; description: string; }[] = [
     },
 ];
 
-const PieceCard = ({ name, description }: { name: string, description: string }) => (
-    <div className="group bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1">
-        <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{name}</h3>
-        <p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+const concepts: { title: string, description: string }[] = [
+    { title: "El Tablero", description: "Un campo de batalla de 64 casillas, 32 claras y 32 oscuras, donde se desarrolla toda la acción." },
+    { title: "Jaque y Jaque Mate", description: "El 'Jaque' es una amenaza directa al rey. El 'Jaque Mate' ocurre cuando el rey está en jaque y no tiene escapatoria, finalizando la partida." },
+    { title: "El Enroque", description: "Un movimiento especial para proteger a tu rey y activar tu torre. Es el único momento en que mueves dos piezas a la vez." },
+    { title: "Promoción del Peón", description: "Si un peón alcanza la última fila, se 'corona' y puede convertirse en una dama, torre, alfil o caballo." },
+    { title: "Captura al Paso", description: "Una regla especial que permite a un peón capturar a un peón enemigo que ha avanzado dos casillas desde su posición inicial." },
+    { title: "Tablas (Empate)", description: "Una partida puede terminar en empate de varias formas: por ahogado, acuerdo, repetición o la regla de los 50 movimientos." },
+];
+
+const RuleItem = ({ title, description, index }: { title: string, description: string, index: number }) => (
+    <div className="group relative flex gap-6 sm:gap-8 border-b py-8 transition-colors first:border-t hover:bg-card">
+        <div className="w-12 sm:w-16 shrink-0 text-center sm:text-right">
+            <span className="text-3xl sm:text-4xl font-black text-foreground/10 transition-colors group-hover:text-primary">{`0${index + 1}`}</span>
+        </div>
+        <div>
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{title}</h3>
+            <p className="text-muted-foreground leading-relaxed">{description}</p>
+        </div>
     </div>
-);
-
-
-const ConceptCard = ({ title, description }: { title: string, description: string }) => (
-  <div className="group bg-card border border-border rounded-2xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:border-primary/20 hover:-translate-y-1">
-    <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{title}</h3>
-    <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-  </div>
 );
 
 
@@ -65,22 +71,19 @@ export default function RulesPage() {
                 <section>
                     <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Movimiento de las Piezas</h2>
                     <p className="text-muted-foreground mb-8 max-w-2xl">Cada pieza tiene un movimiento único. Conocer cómo se mueven es esencial para construir tu estrategia y anticipar los planes de tu oponente.</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {pieces.map((piece) => (
-                            <PieceCard key={piece.name} {...piece} />
+                    <div>
+                        {pieces.map((piece, index) => (
+                            <RuleItem key={piece.name} title={piece.name} description={piece.description} index={index} />
                         ))}
                     </div>
                 </section>
 
                 <section>
                   <h2 className="text-3xl font-bold tracking-tight text-foreground mb-8">Conceptos Clave y Reglas Especiales</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <ConceptCard title="El Tablero" description="Un campo de batalla de 64 casillas, 32 claras y 32 oscuras, donde se desarrolla toda la acción." />
-                    <ConceptCard title="Jaque y Jaque Mate" description="El 'Jaque' es una amenaza directa al rey. El 'Jaque Mate' ocurre cuando el rey está en jaque y no tiene escapatoria, finalizando la partida." />
-                    <ConceptCard title="El Enroque" description="Un movimiento especial para proteger a tu rey y activar tu torre. Es el único momento en que mueves dos piezas a la vez." />
-                    <ConceptCard title="Promoción del Peón" description="Si un peón alcanza la última fila, se 'corona' y puede convertirse en una dama, torre, alfil o caballo." />
-                    <ConceptCard title="Captura al Paso" description="Una regla especial que permite a un peón capturar a un peón enemigo que ha avanzado dos casillas desde su posición inicial." />
-                    <ConceptCard title="Tablas (Empate)" description="Una partida puede terminar en empate de varias formas: por ahogado, acuerdo, repetición o la regla de los 50 movimientos." />
+                  <div>
+                    {concepts.map((concept, index) => (
+                        <RuleItem key={concept.title} title={concept.title} description={concept.description} index={index} />
+                    ))}
                   </div>
                 </section>
             </div>
