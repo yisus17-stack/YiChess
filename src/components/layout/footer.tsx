@@ -12,9 +12,10 @@ export function AppFooter() {
                 <span className="font-bold text-[10px] uppercase tracking-[0.3em] text-muted-foreground">YiChess © {currentYear} • Plataforma de Ajedrez</span>
             </div>
             <div className="flex gap-12">
-                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="./jugar">Jugar</Link>
-                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="./reglas">Reglas</Link>
-                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="./puzzles">Estrategias</Link>
+                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="/jugar">Jugar</Link>
+                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="/reglas">Reglas</Link>
+                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="/puzzles">Puzzles</Link>
+                <Link className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors" href="/estrategias">Estrategias</Link>
             </div>
         
         </div>
