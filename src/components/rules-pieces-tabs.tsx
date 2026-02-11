@@ -29,7 +29,10 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
             <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 sm:p-8 md:p-12 min-h-[420px] md:min-h-[380px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm md:text-base">
-                  {value === 1 ? `${value} Punto` : value === '∞' ? `Valor: ${value}` : `${value} Puntos`}
+                  {value === '∞' 
+                    ? `Valor: ${value}` 
+                    : `Valor: ${value} ${value === 1 ? 'Punto' : 'Puntos'}`
+                  }
                 </p>
                 <h3 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-foreground mb-4 leading-tight">
                   {name}
