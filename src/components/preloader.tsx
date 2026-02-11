@@ -16,26 +16,33 @@ export function Preloader() {
 
     const content = document.getElementById('main-content');
     if (content) {
-      content.style.visibility = 'hidden';
+      // Initially, collapse the content and make it transparent
+      content.style.height = '0px';
+      content.style.overflow = 'hidden';
       content.style.opacity = '0';
+      // Prepare for the fade-in transition
+      content.style.transition = 'opacity 0.5s ease-in-out';
     }
 
     const handleLoad = () => {
       setTimeout(() => {
-        setIsLoading(false);
+        setIsLoading(false); // Start fading out the loader
+        
         if (content) {
-            content.style.transition = 'opacity 0.5s ease-in-out';
-            content.style.visibility = 'visible';
+            // Restore the height, pushing the footer down
+            content.style.height = '';
+            content.style.overflow = '';
+            // Fade in the content
             content.style.opacity = '1';
         }
-      }, 500);
+      }, 500); 
     };
     
     if (document.readyState === 'complete') {
-        handleLoad();
+      handleLoad();
     } else {
-        window.addEventListener('load', handleLoad);
-        return () => window.removeEventListener('load', handleLoad);
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
     }
   }, [isMounted]);
 
