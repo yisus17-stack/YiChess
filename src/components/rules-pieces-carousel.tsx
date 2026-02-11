@@ -31,7 +31,7 @@ const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
           <p className="text-muted-foreground text-lg mb-8">{description}</p>
           <div className="flex gap-4 justify-center lg:justify-start">
             <Button size="lg">Saber más</Button>
-            <Button size="lg" variant="ghost">
+            <Button size="lg" variant="secondary">
               Ver ejemplos <ArrowRight className="ml-2 size-4" />
             </Button>
           </div>
