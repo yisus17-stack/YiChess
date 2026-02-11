@@ -84,7 +84,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
 const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className="relative w-full h-full p-4">
+        <div className="relative w-full h-full p-6">
             {isLoading && <Skeleton className="absolute inset-0 size-full rounded-xl" />}
             <Image
                 src={piece.imageUrl}
