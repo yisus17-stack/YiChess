@@ -42,14 +42,17 @@ const concepts: { title: string, description: string }[] = [
     { title: "Tablas (Empate)", description: "Una partida puede terminar en empate de varias formas: por ahogado, acuerdo, repetición o la regla de los 50 movimientos." },
 ];
 
-const RuleItem = ({ title, description, index }: { title: string, description: string, index: number }) => (
-    <div className="group relative flex gap-6 sm:gap-8 border-b py-8 transition-colors first:border-t hover:bg-card">
-        <div className="w-12 sm:w-16 shrink-0 text-center sm:text-right">
-            <span className="text-3xl sm:text-4xl font-black text-foreground/10 transition-colors group-hover:text-primary">{`0${index + 1}`}</span>
+const RuleStep = ({ title, description, index, isLast }: { title: string, description: string, index: number, isLast: boolean }) => (
+    <div className="flex">
+        <div className="flex flex-col items-center mr-6">
+            <div className="flex-shrink-0 z-10 size-9 rounded-full bg-background border-2 border-primary flex items-center justify-center font-bold text-primary">
+                <span>{index + 1}</span>
+            </div>
+            {!isLast && <div className="w-px flex-grow bg-border" />}
         </div>
-        <div>
-            <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{title}</h3>
-            <p className="text-muted-foreground leading-relaxed">{description}</p>
+        <div className="flex-grow pt-1 pb-12">
+            <h3 className="text-xl font-bold text-foreground">{title}</h3>
+            <p className="text-muted-foreground mt-2 leading-relaxed">{description}</p>
         </div>
     </div>
 );
@@ -59,7 +62,7 @@ export default function RulesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
-        <div className='max-w-5xl mx-auto'>
+        <div className='max-w-3xl mx-auto'>
             <header className="text-center mb-20">
                 <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Reglas Fundamentales del Ajedrez</h1>
                 <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
@@ -69,20 +72,31 @@ export default function RulesPage() {
 
             <div className="space-y-20">
                 <section>
-                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Movimiento de las Piezas</h2>
-                    <p className="text-muted-foreground mb-8 max-w-2xl">Cada pieza tiene un movimiento único. Conocer cómo se mueven es esencial para construir tu estrategia y anticipar los planes de tu oponente.</p>
-                    <div>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Movimiento de las Piezas</h2>
+                    <div className="flex flex-col">
                         {pieces.map((piece, index) => (
-                            <RuleItem key={piece.name} title={piece.name} description={piece.description} index={index} />
+                            <RuleStep 
+                                key={piece.name} 
+                                title={piece.name} 
+                                description={piece.description} 
+                                index={index}
+                                isLast={index === pieces.length - 1}
+                            />
                         ))}
                     </div>
                 </section>
 
                 <section>
-                  <h2 className="text-3xl font-bold tracking-tight text-foreground mb-8">Conceptos Clave y Reglas Especiales</h2>
-                  <div>
+                  <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Conceptos Clave y Reglas Especiales</h2>
+                  <div className="flex flex-col">
                     {concepts.map((concept, index) => (
-                        <RuleItem key={concept.title} title={concept.title} description={concept.description} index={index} />
+                        <RuleStep 
+                            key={concept.title}
+                            title={concept.title} 
+                            description={concept.description} 
+                            index={index} 
+                            isLast={index === concepts.length - 1}
+                        />
                     ))}
                   </div>
                 </section>
