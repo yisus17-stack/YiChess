@@ -22,10 +22,10 @@ export default function HomePage() {
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
               </p>
               <div className="flex gap-4">
-                <Link href="/jugar" className="inline-block bg-primary text-white px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
+                <Link href="/jugar" className="inline-block text-center bg-primary text-white px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
                   Empezar ahora
                 </Link>
-                <Link href="/reglas" className="inline-block border border-gray-200 text-primary px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">
+                <Link href="/reglas" className="inline-block text-center border border-gray-200 text-primary px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-gray-50 transition-all">
                   Ver reglas
                 </Link>
               </div>
