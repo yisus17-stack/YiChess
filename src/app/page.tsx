@@ -36,8 +36,8 @@ export default function HomePage() {
                   alt="YiChess Pro"
                   className="w-full h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
                   src="/chessin-hero.png"
-                  width={420}
-                  height={420}
+                  width={380}
+                  height={380}
                   priority
                 />
               </div>
