@@ -75,7 +75,7 @@ export default function RulesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
-        <div className='max-w-4xl mx-auto'>
+        <div className='max-w-6xl mx-auto'>
             <header className="text-center mb-20">
                 <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Reglas Fundamentales del Ajedrez</h1>
                 <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
