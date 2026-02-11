@@ -21,7 +21,7 @@ export default function HomePage() {
               <p className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-lg mb-10">
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <Link href="/jugar" className="inline-block text-center bg-primary text-white px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
                   Empezar ahora
                 </Link>
