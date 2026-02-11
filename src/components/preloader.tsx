@@ -31,7 +31,7 @@ export function Preloader() {
   return (
     <div
       className={cn(
-        'absolute inset-0 z-40 flex items-center justify-center bg-background transition-opacity duration-500',
+        'absolute inset-0 z-40 flex items-start justify-center pt-48 bg-background transition-opacity duration-500',
         isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
     >
