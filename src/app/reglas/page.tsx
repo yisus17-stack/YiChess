@@ -7,42 +7,54 @@ export const metadata: Metadata = {
   description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y los conceptos fundamentales para empezar a jugar.',
 };
 
-const pieces: { name: string; description: string; value: string | number; imageUrl: string; }[] = [
+const pieces = [
     {
         name: 'El Rey',
         description: 'La pieza más importante. Solo se mueve una casilla en cualquier dirección. Si está en jaque y no puede moverse, es jaque mate.',
         value: '∞',
-        imageUrl: '/rey.png'
+        imageUrl: '/rey.png',
+        details: {
+            title: "El Alma del Ajedrez: El Rey",
+            history: "El Rey es la pieza más antigua y su movimiento ha permanecido casi sin cambios desde los orígenes del ajedrez en la India (Chaturanga). Su supervivencia es el objetivo del juego.",
+            strengths: ["Esencial para la victoria.", "Puede apoyar a otras piezas en el final de la partida."],
+            weaknesses: ["Movimiento muy limitado.", "Es el objetivo principal del oponente."],
+            tip: "En el final, ¡el Rey se convierte en una pieza de ataque! No dudes en centralizarlo para controlar casillas clave y apoyar el avance de tus peones."
+        }
     },
     {
         name: 'La Dama',
         description: 'La pieza más poderosa. Se mueve cualquier número de casillas en línea recta: horizontal, vertical o diagonalmente.',
         value: 9,
-        imageUrl: '/dama.png'
+        imageUrl: '/dama.png',
+        details: null
     },
     {
         name: 'La Torre',
         description: 'Se mueve cualquier número de casillas horizontal o verticalmente. Es una pieza poderosa en filas y columnas abiertas.',
         value: 5,
-        imageUrl: '/torre.png'
+        imageUrl: '/torre.png',
+        details: null
     },
     {
         name: 'El Alfil',
         description: 'Se mueve cualquier número de casillas en diagonal. Cada jugador tiene un alfil que se mueve en casillas claras y otro en oscuras.',
         value: 3,
-        imageUrl: '/alfil.png'
+        imageUrl: '/alfil.png',
+        details: null
     },
     {
         name: 'El Caballo',
         description: 'Se mueve en forma de "L": dos casillas en una dirección y luego una en perpendicular. Es la única pieza que puede saltar sobre otras.',
         value: 3,
-        imageUrl: '/caballo.png'
+        imageUrl: '/caballo.png',
+        details: null
     },
     {
         name: 'El Peón',
         description: 'Avanza una casilla, pero dos en su primer movimiento. Captura en diagonal. Puede coronar y convertirse en otra pieza.',
         value: 1,
-        imageUrl: '/peon.png'
+        imageUrl: '/peon.png',
+        details: null
     },
 ];
 
