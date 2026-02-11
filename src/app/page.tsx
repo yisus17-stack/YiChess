@@ -13,7 +13,7 @@ export default function HomePage() {
       <div className="w-full">
         <div className="max-w-[1200px] w-full mx-auto px-10 py-16 md:py-24">
           <div className="flex flex-col md:flex-row items-center gap-2">
-            <div className="flex-1 text-left">
+            <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
               <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">Plataforma de Ajedrez</span>
               <h1 className="text-[#1a1a1a] text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter mb-8">
                 Aprende de ajedrez en <span className="text-primary">YiChess</span>
