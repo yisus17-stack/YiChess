@@ -20,7 +20,7 @@ type Piece = {
 
 const PieceInfoCard = ({ name, description, value, imageUrl }: Piece) => (
     <div className="bg-card border border-border/50 rounded-2xl h-full flex flex-col">
-      <div className="flex flex-1 flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 p-8 md:p-12">
+      <div className="flex flex-1 flex-col lg:flex-row items-center gap-8 lg:gap-16 p-8 md:p-12">
         <div className="flex-[2] text-center lg:text-left">
           <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
             {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
