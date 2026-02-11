@@ -1,3 +1,5 @@
+'use client';
+
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
@@ -5,9 +7,11 @@ import {
     Carousel,
     CarouselContent,
     CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
+    type CarouselApi,
   } from "@/components/ui/carousel";
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
@@ -78,34 +82,59 @@ const RuleStep = ({ title, description, index, isLast }: { title: string, descri
 );
 
 const PieceInfoCard = ({ name, description, value, imageUrl }: { name: string; description: string; value: string | number; imageUrl: string; }) => (
-    <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-        <div className="flex flex-col md:flex-row">
-            <div className="flex-1 p-8">
-                <div className="flex items-baseline gap-4 mb-4">
-                    <h3 className="text-3xl font-extrabold text-foreground">{name}</h3>
-                    <span className="bg-primary/10 text-primary font-bold text-sm px-3 py-1 rounded-full">{value} Puntos</span>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">{description}</p>
-            </div>
-            <div className="bg-muted/50 md:w-1/3 flex items-center justify-center p-6 md:p-8">
-                <Image
-                    src={imageUrl}
-                    alt={`Pieza de ajedrez: ${name}`}
-                    width={120}
-                    height={120}
-                    className="object-contain drop-shadow-lg"
-                />
-            </div>
+    <div className="bg-card border border-border/50 rounded-2xl">
+      <div className="flex flex-col lg:flex-row items-center gap-8 p-8 md:p-12">
+        <div className="flex-1 text-center lg:text-left">
+          <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
+            {value === '∞' ? 'Pieza Clave' : `Valor: ${value} puntos`}
+          </p>
+          <h3 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 leading-tight">
+            {name}
+          </h3>
+          <p className="text-muted-foreground text-lg mb-8 max-w-lg">{description}</p>
+          <div className="flex gap-4 justify-center lg:justify-start">
+            <Button size="lg">Saber más</Button>
+            <Button size="lg" variant="ghost">
+              Ver ejemplos <ArrowRight className="ml-2 size-4" />
+            </Button>
+          </div>
         </div>
+        <div className="flex-1 flex items-center justify-center lg:w-1/3">
+          <Image
+              src={imageUrl}
+              alt={`Pieza de ajedrez: ${name}`}
+              width={200}
+              height={200}
+              className="object-contain drop-shadow-2xl"
+          />
+        </div>
+      </div>
     </div>
 );
 
 
 export default function RulesPage() {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
   return (
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
-        <div className='max-w-3xl mx-auto'>
+        <div className='max-w-4xl mx-auto'>
             <header className="text-center mb-20">
                 <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Reglas Fundamentales del Ajedrez</h1>
                 <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
@@ -116,7 +145,7 @@ export default function RulesPage() {
             <div className="space-y-20">
                 <section>
                     <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10 text-center">Movimiento y Valor de las Piezas</h2>
-                    <Carousel className="w-full" opts={{ loop: true }}>
+                    <Carousel className="w-full" setApi={setApi} opts={{ loop: true }}>
                         <CarouselContent>
                             {pieces.map((piece) => (
                                 <CarouselItem key={piece.name}>
@@ -124,9 +153,17 @@ export default function RulesPage() {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious />
-                        <CarouselNext />
                     </Carousel>
+                    <div className="flex justify-center gap-2 mt-8">
+                        {Array.from({ length: count }).map((_, index) => (
+                          <button
+                            key={index}
+                            onClick={() => api?.scrollTo(index)}
+                            className={`h-2 rounded-full transition-all duration-300 ${current === index + 1 ? 'w-6 bg-primary' : 'w-2 bg-muted-foreground/50 hover:bg-muted-foreground'}`}
+                            aria-label={`Ir a la diapositiva ${index + 1}`}
+                          />
+                        ))}
+                    </div>
                 </section>
 
                 <section>
