@@ -15,13 +15,13 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center gap-2">
             <div className="flex-1 text-left">
               <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">Plataforma de Ajedrez</span>
-              <h1 className="text-[#1a1a1a] text-6xl font-extrabold leading-tight tracking-tighter mb-8">
+              <h1 className="text-[#1a1a1a] text-5xl md:text-6xl font-extrabold leading-tight tracking-tighter mb-8">
                 Aprende de ajedrez en <span className="text-primary">YiChess</span>
               </h1>
-              <p className="text-gray-600 text-xl font-light leading-relaxed max-w-lg mb-10">
+              <p className="text-gray-600 text-lg md:text-xl font-light leading-relaxed max-w-lg mb-10">
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/jugar" className="inline-block text-center bg-primary text-white px-8 py-5 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
                   Empezar ahora
                 </Link>
