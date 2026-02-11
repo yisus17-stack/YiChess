@@ -14,9 +14,20 @@ export function Preloader() {
   useEffect(() => {
     if (!isMounted) return;
 
+    const content = document.getElementById('main-content');
+    if (content) {
+      content.style.visibility = 'hidden';
+      content.style.opacity = '0';
+    }
+
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoading(false);
+        if (content) {
+            content.style.transition = 'opacity 0.5s ease-in-out';
+            content.style.visibility = 'visible';
+            content.style.opacity = '1';
+        }
       }, 500);
     };
     
@@ -31,7 +42,7 @@ export function Preloader() {
   return (
     <div
       className={cn(
-        'absolute inset-0 z-40 flex items-start justify-center pt-48 bg-background transition-opacity duration-500',
+        'absolute inset-0 z-40 flex items-center justify-center bg-background transition-opacity duration-500',
         isLoading ? 'opacity-100' : 'opacity-0 pointer-events-none'
       )}
     >
