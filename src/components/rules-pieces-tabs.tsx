@@ -1,24 +1,19 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    type CarouselApi,
-} from "@/components/ui/carousel";
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Skeleton } from './ui/skeleton';
 import { cn } from '@/lib/utils';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-type Piece = { 
-    name: string; 
-    description: string; 
-    value: string | number; 
-    imageUrl: string; 
+type Piece = {
+    name: string;
+    description: string;
+    value: string | number;
+    imageUrl: string;
     details: {
         title: string;
         history: string;
@@ -105,58 +100,45 @@ const PieceInfoCard = ({ name, description, value, imageUrl, details }: Piece) =
     );
 };
 
-
-export function RulesPiecesCarousel({ pieces }: { pieces: Piece[] }) {
-    const [api, setApi] = useState<CarouselApi>();
-    const [current, setCurrent] = useState(0);
-    const [dotCount, setDotCount] = useState(0);
-
-    useEffect(() => {
-        if (!api) {
-            return;
-        }
-
-        setDotCount(api.scrollSnapList().length);
-        setCurrent(api.selectedScrollSnap());
-
-        const onSelect = () => {
-            setCurrent(api.selectedScrollSnap());
-        };
-        
-        api.on("select", onSelect);
-        api.on("reInit", onSelect);
-
-        return () => {
-            api.off("select", onSelect);
-            api.off("reInit", onSelect);
-        }
-    }, [api]);
-
-    const scrollTo = useCallback((index: number) => {
-        api?.scrollTo(index);
-    }, [api]);
-
+const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
+    const [isLoading, setIsLoading] = useState(true);
     return (
-        <section>
-            <Carousel className="w-full" setApi={setApi} opts={{ loop: true }}>
-                <CarouselContent>
-                    {pieces.map((piece) => (
-                        <CarouselItem key={piece.name} className="flex-grow">
-                            <PieceInfoCard {...piece} />
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-            </Carousel>
-            <div className="flex justify-center gap-2 mt-8">
-                {Array.from({ length: dotCount || pieces.length }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => scrollTo(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${current === index ? 'w-6 bg-primary' : 'w-2 bg-muted-foreground/50 hover:bg-muted-foreground'}`}
-                    aria-label={`Ir a la diapositiva ${index + 1}`}
-                  />
+        <div className="relative w-20 h-20 md:w-24 md:h-24">
+            {isLoading && <Skeleton className="absolute inset-0 size-full rounded-md" />}
+            <Image
+                src={piece.imageUrl}
+                alt={piece.name}
+                width={96}
+                height={96}
+                className={cn(
+                    "object-contain transition-opacity duration-300",
+                    isLoading ? "opacity-0" : "opacity-100"
+                )}
+                onLoad={() => setIsLoading(false)}
+            />
+        </div>
+    );
+};
+
+export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
+    return (
+        <Tabs defaultValue={pieces[0].name} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 h-auto bg-transparent p-0 gap-4 mb-8">
+                {pieces.map((piece) => (
+                    <TabsTrigger 
+                        key={piece.name} 
+                        value={piece.name}
+                        className="p-2 md:p-4 rounded-lg bg-muted/50 data-[state=active]:bg-primary/10 data-[state=active]:shadow-md data-[state=active]:ring-2 data-[state=active]:ring-primary transition-all h-auto"
+                    >
+                        <PieceImageTrigger piece={piece} />
+                    </TabsTrigger>
                 ))}
-            </div>
-        </section>
+            </TabsList>
+            {pieces.map((piece) => (
+                <TabsContent key={piece.name} value={piece.name}>
+                    <PieceInfoCard {...piece} />
+                </TabsContent>
+            ))}
+        </Tabs>
     );
 }

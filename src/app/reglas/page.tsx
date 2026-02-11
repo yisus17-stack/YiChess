@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
-import { RulesPiecesCarousel } from '@/components/rules-pieces-carousel';
+import { RulesPiecesTabs } from '@/components/rules-pieces-tabs';
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
@@ -118,7 +118,7 @@ export default function RulesPage() {
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
         <div className='max-w-6xl mx-auto py-12'>
-            <RulesPiecesCarousel pieces={pieces} />
+            <RulesPiecesTabs pieces={pieces} />
 
             <section className="mt-20">
               <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Conceptos Clave y Reglas Especiales</h2>
