@@ -1,10 +1,29 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
   description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y los conceptos fundamentales para empezar a jugar.',
 };
+
+const pieceImagesData = [
+    { id: 'king', name: 'El Rey' },
+    { id: 'queen', name: 'La Dama' },
+    { id: 'rook', name: 'La Torre' },
+    { id: 'bishop', name: 'El Alfil' },
+    { id: 'knight', name: 'El Caballo' },
+    { id: 'pawn', name: 'El Peón' },
+  ].map(piece => {
+    const imageData = PlaceHolderImages.find(p => p.id === piece.id);
+    return {
+      ...piece,
+      imageUrl: imageData?.imageUrl,
+      imageHint: imageData?.imageHint,
+    }
+  }).filter(p => p.imageUrl);
+
 
 const pieces: { name: string; description: string; }[] = [
     {
@@ -71,6 +90,28 @@ export default function RulesPage() {
             </header>
 
             <div className="space-y-20">
+
+                <section>
+                    <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10 text-center">Conoce las Piezas</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10">
+                        {pieceImagesData.map((piece) => (
+                            <div key={piece.id} className="flex flex-col items-center text-center group">
+                                <div className="bg-card p-4 rounded-2xl border border-border group-hover:border-primary/20 group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 w-full aspect-square flex items-center justify-center">
+                                    <Image
+                                        src={piece.imageUrl!}
+                                        alt={`Pieza de ajedrez: ${piece.name}`}
+                                        width={120}
+                                        height={120}
+                                        className="object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+                                        data-ai-hint={piece.imageHint}
+                                    />
+                                </div>
+                                <h3 className="mt-4 font-bold text-lg text-foreground group-hover:text-primary transition-colors">{piece.name}</h3>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
                 <section>
                     <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Movimiento de las Piezas</h2>
                     <div className="flex flex-col">
