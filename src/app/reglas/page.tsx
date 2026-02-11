@@ -14,7 +14,7 @@ const pieces = [
         value: '∞',
         imageUrl: '/rey.png',
         details: {
-            title: "El Alma del Ajedrez: El Rey",
+            title: "El Rey",
             history: "El Rey es la pieza más antigua y su movimiento ha permanecido casi sin cambios desde los orígenes del ajedrez en la India (Chaturanga). Su supervivencia es el objetivo del juego.",
             strengths: ["Esencial para la victoria.", "Puede apoyar a otras piezas en el final de la partida."],
             weaknesses: ["Movimiento muy limitado.", "Es el objetivo principal del oponente."],
@@ -26,35 +26,65 @@ const pieces = [
         description: 'La pieza más poderosa. Se mueve cualquier número de casillas en línea recta: horizontal, vertical o diagonalmente.',
         value: 9,
         imageUrl: '/dama.png',
-        details: null
+        details: {
+            title: "La Dama",
+            history: "Originalmente una de las piezas más débiles (el 'ferz'), que solo se movía una casilla en diagonal. Su transformación a la pieza más poderosa en el siglo XV revolucionó el ajedrez europeo.",
+            strengths: ["Movilidad excepcional.", "Capaz de atacar y defender simultáneamente en todo el tablero."],
+            weaknesses: ["Es una pieza tan valiosa que su pérdida es casi siempre decisiva.", "Puede ser un objetivo para tácticas y amenazas."],
+            tip: "No desarrolles tu dama demasiado pronto. Usarla al principio de la partida puede hacer que pierdas tiempos valiosos mientras el oponente la ataca con piezas de menor valor."
+        }
     },
     {
         name: 'La Torre',
         description: 'Se mueve cualquier número de casillas horizontal o verticalmente. Es una pieza poderosa en filas y columnas abiertas.',
         value: 5,
         imageUrl: '/torre.png',
-        details: null
+        details: {
+            title: "La Torre",
+            history: "Representa los carros de guerra en el ajedrez persa (el 'rukh'). Su movimiento simple pero poderoso la convierte en una pieza fundamental, especialmente en el final de la partida.",
+            strengths: ["Controla filas y columnas enteras.", "Excelente para dar mates en la última fila ('back-rank mate')."],
+            weaknesses: ["Es menos efectiva en posiciones cerradas y llenas de peones.", "Vulnerable a los ataques diagonales de los alfiles."],
+            tip: "Una torre en la séptima fila es una ventaja posicional enorme. Puede atacar peones, restringir al rey enemigo y crear múltiples amenazas."
+        }
     },
     {
         name: 'El Alfil',
         description: 'Se mueve cualquier número de casillas en diagonal. Cada jugador tiene un alfil que se mueve en casillas claras y otro en oscuras.',
         value: 3,
         imageUrl: '/alfil.png',
-        details: null
+        details: {
+            title: "El Alfil",
+            history: "Simbolizaba a los elefantes en las primeras versiones del ajedrez ('gaja'). Su movimiento diagonal lo hace único y muy útil para crear amenazas a larga distancia.",
+            strengths: ["Excelente en posiciones abiertas.", "La pareja de alfiles puede controlar una gran cantidad de casillas de ambos colores."],
+            weaknesses: ["Limitado a casillas de un solo color.", "Puede quedar atrapado detrás de su propia cadena de peones."],
+            tip: "Piensa en tus alfiles como 'alfil bueno' y 'alfil malo'. El 'bueno' es el que se mueve en casillas de color opuesto a tus peones centrales, el 'malo' está restringido por ellos."
+        }
     },
     {
         name: 'El Caballo',
         description: 'Se mueve en forma de "L": dos casillas en una dirección y luego una en perpendicular. Es la única pieza que puede saltar sobre otras.',
         value: 3,
         imageUrl: '/caballo.png',
-        details: null
+        details: {
+            title: "El Caballo",
+            history: "Su movimiento en 'L' es uno de los más antiguos y se ha mantenido sin cambios desde los inicios del ajedrez. Representa la caballería y su capacidad de saltar sobre obstáculos.",
+            strengths: ["Puede saltar sobre otras piezas.", "Excelente en posiciones cerradas y para crear horquillas (forks)."],
+            weaknesses: ["Es una pieza de corto alcance.", "Un caballo en el borde del tablero controla menos casillas y es menos poderoso."],
+            tip: "¡Un caballo en el borde es una deshonra! (A knight on the rim is dim). Intenta mantener tus caballos cerca del centro del tablero para maximizar su poder."
+        }
     },
     {
         name: 'El Peón',
         description: 'Avanza una casilla, pero dos en su primer movimiento. Captura en diagonal. Puede coronar y convertirse en otra pieza.',
         value: 1,
         imageUrl: '/peon.png',
-        details: null
+        details: {
+            title: "El Peón",
+            history: "Considerado el 'alma del ajedrez' por Philidor. Representa la infantería. Aunque individualmente es la pieza más débil, la estructura de peones a menudo decide el resultado de la partida.",
+            strengths: ["Pueden controlar casillas importantes.", "La posibilidad de coronar los convierte en una amenaza en el final."],
+            weaknesses: ["Movilidad muy limitada.", "Un peón aislado o retrasado puede ser una debilidad estructural grave."],
+            tip: "La mayoría de las partidas se ganan o se pierden por la estrategia de peones. Avanza tus peones con cuidado y busca crear 'peones pasados' en el final."
+        }
     },
 ];
 

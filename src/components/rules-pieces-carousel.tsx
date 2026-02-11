@@ -72,13 +72,13 @@ const PieceInfoCard = ({ name, description, value, imageUrl, details }: Piece) =
                 </DialogHeader>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-6">
                     <div>
-                        <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsUp className="size-5 text-green-500" /> Fortalezas</h4>
+                        <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsUp className="size-5 text-green-600" /> Fortalezas</h4>
                         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                             {details.strengths.map((s, i) => <li key={i}>{s}</li>)}
                         </ul>
                     </div>
                     <div>
-                        <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsDown className="size-5 text-red-500" /> Debilidades</h4>
+                        <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsDown className="size-5 text-red-600" /> Debilidades</h4>
                         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                             {details.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
                         </ul>
