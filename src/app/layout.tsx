@@ -27,12 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${lexend.variable} light`}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </head>
+      <head />
       <body className={cn('font-display antialiased')}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <AppHeader />
