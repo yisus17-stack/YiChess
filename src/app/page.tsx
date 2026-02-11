@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <div className="w-full">
-        <div className="max-w-[1200px] w-full mx-auto px-10 py-16 md:py-24">
+        <div className="max-w-[1200px] w-full mx-auto px-10 pt-16 md:pt-24 pb-8">
           <div className="flex flex-col md:flex-row items-center gap-2">
             <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
               <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">Plataforma de Ajedrez</span>
@@ -30,7 +30,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-16 md:mt-0">
+            <div className="w-full md:w-1/2 lg:w-4/12 flex items-center justify-center mt-8 md:mt-0">
               <div className="animate-fadeInSoft">
                 <Image
                   alt="YiChess Pro"
