@@ -27,8 +27,6 @@ type Piece = {
 };
 
 const PieceInfoCard = ({ name, description, value, imageUrl, details }: Piece) => {
-    const [imageLoaded, setImageLoaded] = useState(false);
-
     return (
         <Dialog>
             <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl h-full flex flex-col">
@@ -54,19 +52,13 @@ const PieceInfoCard = ({ name, description, value, imageUrl, details }: Piece) =
                     </Button>
                   </div>
                 </div>
-                <div className="flex-1 flex items-center justify-center w-[200px] h-[200px] relative">
-                    {!imageLoaded && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="loader"></div>
-                        </div>
-                    )}
+                <div className="flex-1 flex items-center justify-center">
                     <Image
                         src={imageUrl}
                         alt={`Pieza de ajedrez: ${name}`}
                         width={200}
                         height={200}
-                        className={`object-contain drop-shadow-2xl transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                        onLoad={() => setImageLoaded(true)}
+                        className="object-contain drop-shadow-2xl"
                     />
                 </div>
               </div>

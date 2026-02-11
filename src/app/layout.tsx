@@ -5,6 +5,7 @@ import { AppFooter } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Lexend } from 'next/font/google';
+import { Preloader } from '@/components/preloader';
 
 export const metadata: Metadata = {
   title: {
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="es" className={`${lexend.variable} light`}>
       <head />
       <body className={cn('font-display antialiased')}>
+        <Preloader />
         <div className="relative flex min-h-dvh flex-col bg-background">
           <AppHeader />
           <main className="flex-1 flex flex-col items-center pb-32">
