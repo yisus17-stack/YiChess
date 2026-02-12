@@ -37,7 +37,7 @@ export default function MapaDelSitioPage() {
     <div className="max-w-[1200px] w-full px-10">
       <AppBreadcrumb />
       <div className='max-w-4xl mx-auto'>
-        <header className="text-center mb-16">
+        <header className="text-center mb-12 md:mb-16">
             <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Mapa del Sitio</h1>
             <p className="text-lg font-light text-muted-foreground max-w-2xl mx-auto">
                 Navega fácilmente por todas las secciones de YiChess. Aquí tienes un resumen de todo nuestro contenido.

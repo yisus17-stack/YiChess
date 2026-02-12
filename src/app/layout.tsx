@@ -5,7 +5,6 @@ import { AppFooter } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Lexend } from 'next/font/google';
-import { Preloader } from '@/components/preloader';
 
 export const metadata: Metadata = {
   title: {
@@ -33,8 +32,7 @@ export default function RootLayout({
         <div className="relative flex min-h-dvh flex-col bg-background">
           <AppHeader />
           <main className="relative flex-1 flex flex-col">
-            <Preloader />
-            <div id="main-content" className="w-full flex flex-col items-center pb-32">
+            <div id="main-content" className="w-full flex flex-col items-center pb-16 md:pb-24">
               {children}
             </div>
           </main>

@@ -12,8 +12,8 @@ export default function ContactPage() {
     <div className="max-w-[1200px] w-full px-10">
       <AppBreadcrumb />
       <div className='max-w-2xl mx-auto'>
-        <header className="text-center mb-12">
-            <h1 className="text-[#1a1a1a] dark:text-white text-5xl font-extrabold leading-tight tracking-tight mb-6">Contacto</h1>
+        <header className="text-center mb-8 md:mb-12">
+            <h1 className="text-[#1a1a1a] dark:text-white text-5xl font-extrabold leading-tight tracking-tight mb-4 md:mb-6">Contacto</h1>
             <p className="text-gray-600 dark:text-gray-400 text-lg font-light leading-relaxed max-w-xl mx-auto">
             ¿Tienes alguna sugerencia o comentario? Nos encantaría saber de ti.
             </p>

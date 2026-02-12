@@ -34,12 +34,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <div className="w-full bg-background relative overflow-hidden">
         <div className="max-w-[1200px] w-full mx-auto px-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-20 md:py-28 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-12 md:py-28 relative z-10">
             <div className="text-center md:text-left">
-              <h1 className="text-5xl sm:text-6xl lg:text-6xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
+              <h1 className="text-5xl sm:text-6xl lg:text-6xl font-extrabold text-foreground tracking-tighter mb-4 md:mb-6 animate-fadeInSoft">
                 <span className="block">Aprende ajedrez en <span className="text-primary">YiChess</span></span>
               </h1>
-              <p className="max-w-2xl mx-auto md:mx-0 text-lg text-muted-foreground font-light leading-relaxed mb-10">
+              <p className="max-w-2xl mx-auto md:mx-0 text-lg text-muted-foreground font-light leading-relaxed mb-8 md:mb-10">
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full sm:w-auto mx-auto md:mx-0">
@@ -77,8 +77,8 @@ export default function HomePage() {
       
       {/* Features Section */}
       <div className="w-full bg-muted/30">
-        <div className="max-w-[1200px] w-full mx-auto px-10 py-20 md:py-24">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="max-w-[1200px] w-full mx-auto px-10 py-16 md:py-24">
+          <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
             <h2 className="text-4xl font-bold tracking-tight text-foreground">
               Todo lo que necesitas para ser un Gran Maestro
             </h2>
@@ -103,7 +103,7 @@ export default function HomePage() {
       </div>
 
       {/* CTA Card Section */}
-      <div className="max-w-[1200px] w-full mx-auto px-10 py-20">
+      <div className="max-w-[1200px] w-full mx-auto px-10 py-16">
         <div className="bg-primary rounded-3xl p-10 md:p-16 shadow-2xl relative overflow-hidden">
           <div className="relative z-10 text-center">
             <h1 className="text-2xl md:text-5xl font-bold text-primary-foreground tracking-tight">

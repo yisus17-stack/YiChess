@@ -115,17 +115,17 @@ export default function StrategiesPage() {
     <div className="max-w-[1200px] w-full px-10">
       <AppBreadcrumb />
       <div className='max-w-5xl mx-auto'>
-        <header className="text-center mb-20">
+        <header className="text-center mb-12 md:mb-20">
             <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Domina el Arte del Ajedrez</h1>
             <p className="text-lg font-light text-muted-foreground max-w-3xl mx-auto">
                 Explora los conceptos fundamentales, desde las aperturas más sólidas hasta las tácticas más letales. Cada lección te acerca a la maestría del tablero.
             </p>
         </header>
 
-        <div className="space-y-20">
+        <div className="space-y-12 md:space-y-20">
             <section>
               <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Aperturas y Desarrollo</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl">Los primeros movimientos son cruciales. Aprende a construir una base sólida para tus partidas y a tomar el control desde el inicio.</p>
+              <p className="text-muted-foreground mb-6 md:mb-8 max-w-2xl">Los primeros movimientos son cruciales. Aprende a construir una base sólida para tus partidas y a tomar el control desde el inicio.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {openings.map((strategy) => (
                   <StrategyCard key={strategy.name} {...strategy} />
@@ -135,7 +135,7 @@ export default function StrategiesPage() {
 
             <section>
               <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Tácticas Fundamentales</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl">La táctica decide la mayoría de las partidas. Aprende a crear oportunidades, a explotar las debilidades de tu oponente y a ganar material.</p>
+              <p className="text-muted-foreground mb-6 md:mb-8 max-w-2xl">La táctica decide la mayoría de las partidas. Aprende a crear oportunidades, a explotar las debilidades de tu oponente y a ganar material.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tactics.map((strategy) => (
                   <StrategyCard key={strategy.name} {...strategy} />
@@ -145,7 +145,7 @@ export default function StrategiesPage() {
             
             <section>
               <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Estrategia y Jaque Mate</h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl">Piensa a largo plazo y finaliza la partida. Reconoce y ejecuta los mates ganadores para asegurar la victoria.</p>
+              <p className="text-muted-foreground mb-6 md:mb-8 max-w-2xl">Piensa a largo plazo y finaliza la partida. Reconoce y ejecuta los mates ganadores para asegurar la victoria.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {strategyAndMates.map((strategy) => (
                   <StrategyCard key={strategy.name} {...strategy} />

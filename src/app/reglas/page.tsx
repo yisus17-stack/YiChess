@@ -105,7 +105,7 @@ const RuleStep = ({ title, description, index, isLast }: { title: string, descri
             </div>
             {!isLast && <div className="w-px flex-grow bg-border" />}
         </div>
-        <div className="flex-grow pt-1 pb-12">
+        <div className="flex-grow pt-1 pb-8 md:pb-12">
             <h3 className="text-xl font-bold text-foreground">{title}</h3>
             <p className="text-muted-foreground mt-2 leading-relaxed">{description}</p>
         </div>
@@ -120,8 +120,8 @@ export default function RulesPage() {
         <div className='max-w-6xl mx-auto'>
             <RulesPiecesTabs pieces={pieces} />
 
-            <section className="mt-20">
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-10">Conceptos Clave y Reglas Especiales</h2>
+            <section className="mt-12 md:mt-20">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-8 md:mb-10">Conceptos Clave y Reglas Especiales</h2>
               <div className="flex flex-col">
                 {concepts.map((concept, index) => (
                     <RuleStep 
