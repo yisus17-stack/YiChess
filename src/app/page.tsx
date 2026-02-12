@@ -34,8 +34,8 @@ export default function HomePage() {
       {/* Hero Section */}
       <div className="w-full bg-background relative overflow-hidden">
         <div className="max-w-[1200px] w-full mx-auto px-10">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center py-20 md:py-28 relative z-10">
-            <div className="text-center md:text-left md:col-span-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-20 md:py-28 relative z-10">
+            <div className="text-center md:text-left md:col-span-2">
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
                 Aprende de ajedrez en <span className="text-primary">YiChess</span>
               </h1>
@@ -51,9 +51,9 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="relative flex justify-center md:justify-end md:col-span-2">
+            <div className="relative flex justify-center md:justify-end md:col-span-1">
                 <Image
-                    src="/chessin-hero.png"
+                    src="/chess.png"
                     alt="Héroe de Ajedrez"
                     width={300}
                     height={300}
