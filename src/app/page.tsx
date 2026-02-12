@@ -114,9 +114,9 @@ export default function HomePage() {
               <Image
                 src="/chessin-hero.png"
                 alt="Héroe de Ajedrez"
-                width={400}
-                height={400}
-                className="object-contain -mb-10 md:-mb-16 md:-mr-10 drop-shadow-2xl"
+                width={280}
+                height={280}
+                className="object-contain -mb-8 md:-mb-12 md:-mr-6 drop-shadow-2xl"
               />
           </div>
         </div>
