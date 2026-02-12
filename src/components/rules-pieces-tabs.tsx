@@ -26,7 +26,7 @@ type Piece = {
 const PieceInfoCard = ({ name, description, value, details }: Piece) => {
     return (
         <Dialog>
-            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-10 md:min-h-[340px]">
+            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-10 md:min-h-[300px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
                   {value === '∞' 
@@ -34,7 +34,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
                     : `Valor: ${value} ${value === 1 ? 'Punto' : 'Puntos'}`
                   }
                 </p>
-                <h3 className="text-2xl sm:text-4xl font-extrabold text-foreground mb-3 leading-tight">
+                <h3 className="text-xl sm:text-3xl font-extrabold text-foreground mb-3 leading-tight">
                   {name}
                 </h3>
                 <p className="text-muted-foreground text-base sm:text-lg mb-6">{description}</p>
@@ -53,7 +53,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
               </div>
             </div>
             {details && (
-                <DialogContent className="max-w-2xl p-4 sm:p-8 max-h-[85vh] overflow-y-auto">
+                <DialogContent className="max-w-2xl p-4 sm:p-8 max-h-[85vh] w-[90vw] rounded-xl overflow-y-auto">
                     <DialogHeader className="text-left mb-2">
                         <DialogTitle className="text-2xl sm:text-3xl font-extrabold text-foreground mb-2">{details.title}</DialogTitle>
                         <DialogDescription className="text-base text-muted-foreground">
@@ -62,13 +62,13 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
                     </DialogHeader>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
                         <div>
-                            <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsUp className="size-5 text-green-500" /> Fortalezas</h4>
+                            <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsUp className="size-5 text-foreground" /> Fortalezas</h4>
                             <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground sm:text-base">
                                 {details.strengths.map((s, i) => <li key={i}>{s}</li>)}
                             </ul>
                         </div>
                         <div>
-                            <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsDown className="size-5 text-red-500" /> Debilidades</h4>
+                            <h4 className="font-bold text-lg mb-3 flex items-center gap-2"><ThumbsDown className="size-5 text-foreground" /> Debilidades</h4>
                             <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground sm:text-base">
                                 {details.weaknesses.map((w, i) => <li key={i}>{w}</li>)}
                             </ul>
