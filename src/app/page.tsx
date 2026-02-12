@@ -36,11 +36,10 @@ export default function HomePage() {
         <div className="max-w-[1200px] w-full mx-auto px-10">
           <div className="text-center py-20 md:py-28 relative z-10">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
-              El Ajedrez, <br className="md:hidden" />
-              Elevado a <span className="text-primary">Arte</span>.
+              Aprende de ajedrez en <span className="text-primary">YiChess</span>
             </h1>
             <p className="max-w-2xl mx-auto text-lg text-muted-foreground font-light leading-relaxed mb-10">
-              Tu viaje para dominar el tablero comienza aquí. Aprende, practica y compite en la plataforma definitiva para ajedrecistas de todos los niveles.
+              La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto mx-auto">
               <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
@@ -114,9 +113,9 @@ export default function HomePage() {
               <Image
                 src="/chessin-hero.png"
                 alt="Héroe de Ajedrez"
-                width={280}
-                height={280}
-                className="object-contain -mb-8 md:-mb-12 md:-mr-6 drop-shadow-2xl"
+                width={200}
+                height={200}
+                className="object-contain -mb-10 md:-mb-16 md:-mr-4 drop-shadow-2xl"
               />
           </div>
         </div>
