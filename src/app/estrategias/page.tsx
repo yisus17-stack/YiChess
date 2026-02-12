@@ -8,6 +8,19 @@ export const metadata: Metadata = {
   description: 'Descubre estrategias y tácticas de ajedrez, desde aperturas hasta jaque mate.',
 };
 
+const slugify = (text: string) => {
+    return text
+        .toString()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '')
+        .replace(/--+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+}
+
 // Section 1: Openings
 const openings = [
   {
@@ -128,7 +141,9 @@ export default function StrategiesPage() {
               <p className="text-muted-foreground mb-6 md:mb-8 max-w-2xl">Los primeros movimientos son cruciales. Aprende a construir una base sólida para tus partidas y a tomar el control desde el inicio.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {openings.map((strategy) => (
-                  <StrategyCard key={strategy.name} {...strategy} />
+                  <div id={slugify(strategy.name)} key={strategy.name} className="scroll-mt-24">
+                    <StrategyCard {...strategy} />
+                  </div>
                 ))}
               </div>
             </section>
@@ -138,7 +153,9 @@ export default function StrategiesPage() {
               <p className="text-muted-foreground mb-6 md:mb-8 max-w-2xl">La táctica decide la mayoría de las partidas. Aprende a crear oportunidades, a explotar las debilidades de tu oponente y a ganar material.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {tactics.map((strategy) => (
-                  <StrategyCard key={strategy.name} {...strategy} />
+                  <div id={slugify(strategy.name)} key={strategy.name} className="scroll-mt-24">
+                    <StrategyCard {...strategy} />
+                  </div>
                 ))}
               </div>
             </section>
@@ -148,7 +165,9 @@ export default function StrategiesPage() {
               <p className="text-muted-foreground mb-6 md:mb-8 max-w-2xl">Piensa a largo plazo y finaliza la partida. Reconoce y ejecuta los mates ganadores para asegurar la victoria.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {strategyAndMates.map((strategy) => (
-                  <StrategyCard key={strategy.name} {...strategy} />
+                  <div id={slugify(strategy.name)} key={strategy.name} className="scroll-mt-24">
+                    <StrategyCard {...strategy} />
+                  </div>
                 ))}
               </div>
             </section>

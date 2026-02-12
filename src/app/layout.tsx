@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${lexend.variable} light`}>
+    <html lang="es" className={`${lexend.variable} light scroll-smooth`}>
       <head />
       <body className={cn('font-display antialiased')}>
         <div className="relative flex min-h-dvh flex-col bg-background">
