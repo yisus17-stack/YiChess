@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -105,8 +106,15 @@ const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
 };
 
 export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
+    const searchParams = useSearchParams();
+    const pieceQuery = searchParams.get('piece');
+
+    const defaultTab = pieceQuery && pieces.find(p => p.name === pieceQuery)
+        ? pieceQuery
+        : pieces[0].name;
+
     return (
-        <Tabs defaultValue={pieces[0].name} className="w-full">
+        <Tabs defaultValue={defaultTab} className="w-full">
             {pieces.map((piece) => (
                 <TabsContent key={piece.name} value={piece.name}>
                     <PieceInfoCard {...piece} />

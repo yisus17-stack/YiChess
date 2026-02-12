@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
 import { RulesPiecesTabs } from '@/components/rules-pieces-tabs';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const metadata: Metadata = {
   title: 'Reglas del Ajedrez',
@@ -112,13 +114,28 @@ const RuleStep = ({ title, description, index, isLast }: { title: string, descri
     </div>
 );
 
+function RulesPiecesTabsSkeleton() {
+    return (
+        <div>
+            <Skeleton className="h-[300px] w-full rounded-2xl" />
+            <div className="grid w-full grid-cols-3 md:grid-cols-6 gap-4 mt-8">
+                {Array.from({ length: 6 }).map((_, i) => (
+                    <Skeleton key={i} className="aspect-square h-auto w-full rounded-xl" />
+                ))}
+            </div>
+        </div>
+    )
+}
+
 
 export default function RulesPage() {
   return (
     <div className="max-w-[1200px] w-full px-10">
         <AppBreadcrumb />
         <div className='max-w-6xl mx-auto'>
-            <RulesPiecesTabs pieces={pieces} />
+            <Suspense fallback={<RulesPiecesTabsSkeleton />}>
+              <RulesPiecesTabs pieces={pieces} />
+            </Suspense>
 
             <section className="mt-12 md:mt-20">
               <h2 className="text-3xl font-bold tracking-tight text-foreground mb-8 md:mb-10">Conceptos Clave y Reglas Especiales</h2>
