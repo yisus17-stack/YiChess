@@ -20,4 +20,10 @@ export const searchableContent: SearchableContent[] = [
   { title: 'Patrones de Jaque Mate', path: '/estrategias', description: 'Aprende las secuencias finales para dar el golpe de gracia a tu oponente.', keywords: 'estrategia táctica fin de juego mate' },
   { title: 'Jaque Mate de Coz', path: '/estrategias', description: 'Un mate espectacular dado por un caballo cuando el rey está ahogado.', keywords: 'estrategia táctica mate ahogado caballo smothered mate' },
   { title: 'Jaque del Pasillo', path: '/estrategias', description: 'Un mate común en la última fila, atrapando al rey sin escapatoria.', keywords: 'estrategia táctica mate pasillo back-rank mate' },
+  { title: 'El Rey', path: '/reglas', description: 'La pieza más importante. Solo se mueve una casilla en cualquier dirección. Si está en jaque y no puede moverse, es jaque mate.', keywords: 'pieza rey' },
+  { title: 'La Dama', path: '/reglas', description: 'La pieza más poderosa. Se mueve cualquier número de casillas en línea recta: horizontal, vertical o diagonalmente.', keywords: 'pieza dama reina' },
+  { title: 'La Torre', path: '/reglas', description: 'Se mueve cualquier número de casillas horizontal o verticalmente. Es una pieza poderosa en filas y columnas abiertas.', keywords: 'pieza torre' },
+  { title: 'El Alfil', path: '/reglas', description: 'Se mueve cualquier número de casillas en diagonal. Cada jugador tiene un alfil que se mueve en casillas claras y otro en oscuras.', keywords: 'pieza alfil' },
+  { title: 'El Caballo', path: '/reglas', description: 'Se mueve en forma de "L": dos casillas en una dirección y luego una en perpendicular. Es la única pieza que puede saltar sobre otras.', keywords: 'pieza caballo' },
+  { title: 'El Peón', path: '/reglas', description: 'Avanza una casilla, pero dos en su primer movimiento. Captura en diagonal. Puede coronar y convertirse en otra pieza.', keywords: 'pieza peón' },
 ];
