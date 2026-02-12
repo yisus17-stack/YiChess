@@ -34,20 +34,32 @@ export default function HomePage() {
       {/* Hero Section */}
       <div className="w-full bg-background relative overflow-hidden">
         <div className="max-w-[1200px] w-full mx-auto px-10">
-          <div className="text-center py-20 md:py-28 relative z-10">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
-              Aprende de ajedrez en <span className="text-primary">YiChess</span>
-            </h1>
-            <p className="max-w-2xl mx-auto text-lg text-muted-foreground font-light leading-relaxed mb-10">
-              La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto mx-auto">
-              <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                Empezar a Jugar
-              </Link>
-              <Link href="/estrategias" className="inline-block w-full sm:w-auto text-center border border-border text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-accent transition-all">
-                Explorar Estrategias
-              </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center py-20 md:py-28 relative z-10">
+            <div className="text-center md:text-left">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
+                Aprende de ajedrez en <span className="text-primary">YiChess</span>
+              </h1>
+              <p className="max-w-2xl mx-auto md:mx-0 text-lg text-muted-foreground font-light leading-relaxed mb-10">
+                La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full sm:w-auto mx-auto md:mx-0">
+                <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                  Empezar a Jugar
+                </Link>
+                <Link href="/estrategias" className="inline-block w-full sm:w-auto text-center border border-border text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-accent transition-all">
+                  Explorar Estrategias
+                </Link>
+              </div>
+            </div>
+            <div className="relative flex justify-center md:justify-start">
+                <Image
+                    src="/chessin-hero.png"
+                    alt="Héroe de Ajedrez"
+                    width={400}
+                    height={400}
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                />
             </div>
           </div>
         </div>
@@ -92,15 +104,15 @@ export default function HomePage() {
 
       {/* CTA Card Section */}
       <div className="max-w-[1200px] w-full mx-auto px-10 py-20">
-        <div className="bg-primary rounded-3xl p-10 md:p-16 shadow-2xl relative overflow-hidden grid grid-cols-1 md:grid-cols-2 items-center gap-8">
-          <div className="relative z-10 text-center md:text-left order-2 md:order-1">
+        <div className="bg-primary rounded-3xl p-10 md:p-16 shadow-2xl relative overflow-hidden">
+          <div className="relative z-10 text-center">
             <h1 className="text-2xl md:text-5xl font-bold text-primary-foreground tracking-tight">
               Comienza con YiChess Hoy Mismo
             </h1>
-            <p className="text-primary-foreground/80 text-base font-light max-w-2xl leading-relaxed mt-4">
+            <p className="text-primary-foreground/80 text-base font-light max-w-2xl leading-relaxed mt-4 mx-auto">
               Mejora tus habilidades de ajedrez con YiChess.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 z-10 mt-8 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 z-10 mt-8 justify-center">
               <Link href="/puzzles" className="text-center bg-background text-foreground font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
                 Resolver Puzzles
               </Link>
@@ -108,15 +120,6 @@ export default function HomePage() {
                 Aprender Estrategias
               </Link>
             </div>
-          </div>
-          <div className="relative z-20 order-1 md:order-2 flex justify-center md:justify-end">
-              <Image
-                src="/chessin-hero.png"
-                alt="Héroe de Ajedrez"
-                width={200}
-                height={200}
-                className="object-contain -mb-10 md:-mb-16 md:-mr-4 drop-shadow-2xl"
-              />
           </div>
         </div>
       </div>
