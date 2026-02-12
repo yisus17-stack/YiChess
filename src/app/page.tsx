@@ -36,9 +36,8 @@ export default function HomePage() {
         <div className="max-w-[1200px] w-full mx-auto px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-20 md:py-28 relative z-10">
             <div className="text-center md:text-left">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
-                <span className="block">Aprende de ajedrez</span>
-                <span>en <span className="text-primary">YiChess</span></span>
+              <h1 className="text-5xl sm:text-6xl lg:text-6xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
+                <span className="block">Aprende ajedrez en <span className="text-primary">YiChess</span></span>
               </h1>
               <p className="max-w-2xl mx-auto md:mx-0 text-lg text-muted-foreground font-light leading-relaxed mb-10">
                 La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
