@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -27,7 +27,7 @@ type Piece = {
 const PieceInfoCard = ({ name, description, value, details }: Piece) => {
     return (
         <Dialog>
-            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-10 md:min-h-[300px]">
+            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-10 md:min-h-[220px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
                   {value === '∞' 
@@ -35,10 +35,10 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
                     : `Valor: ${value} ${value === 1 ? 'Punto' : 'Puntos'}`
                   }
                 </p>
-                <h3 className="text-xl sm:text-3xl font-extrabold text-foreground mb-3 leading-tight">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-foreground mb-3 leading-tight">
                   {name}
                 </h3>
-                <p className="text-muted-foreground text-base sm:text-lg mb-6">{description}</p>
+                <p className="text-muted-foreground text-sm sm:text-base mb-6">{description}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   {details ? (
                       <DialogTrigger asChild>
@@ -109,12 +109,23 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     const searchParams = useSearchParams();
     const pieceQuery = searchParams.get('piece');
 
-    const defaultTab = pieceQuery && pieces.find(p => p.name === pieceQuery)
-        ? pieceQuery
-        : pieces[0].name;
+    const getInitialTab = () => {
+        return pieceQuery && pieces.find(p => p.name === pieceQuery)
+            ? pieceQuery
+            : pieces[0].name;
+    };
+    
+    const [activeTab, setActiveTab] = useState(getInitialTab);
+
+    useEffect(() => {
+        const targetTab = pieceQuery && pieces.find(p => p.name === pieceQuery) ? pieceQuery : null;
+        if (targetTab && targetTab !== activeTab) {
+            setActiveTab(targetTab);
+        }
+    }, [pieceQuery, pieces, activeTab]);
 
     return (
-        <Tabs defaultValue={defaultTab} className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             {pieces.map((piece) => (
                 <TabsContent key={piece.name} value={piece.name}>
                     <PieceInfoCard {...piece} />
