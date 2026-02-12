@@ -54,7 +54,7 @@ const PieceInfoCard = ({ name, description, value, details }: Piece) => {
               </div>
             </div>
             {details && (
-                <DialogContent className="max-w-2xl p-4 sm:p-8 max-h-[85vh] w-[90vw] rounded-xl overflow-y-auto">
+                <DialogContent className="max-w-2xl w-[90vw] rounded-xl p-4 sm:p-8 max-h-[85vh] overflow-y-auto">
                     <DialogHeader className="text-left mb-2">
                         <DialogTitle className="text-2xl sm:text-3xl font-extrabold text-foreground mb-2">{details.title}</DialogTitle>
                         <DialogDescription className="text-base text-muted-foreground">
@@ -107,26 +107,20 @@ const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
 
 export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     const searchParams = useSearchParams();
-    const pieceQuery = searchParams.get('piece');
-
-    const getTabFromQuery = React.useCallback(() => {
-        if (pieceQuery) {
-            const foundPiece = pieces.find(p => p.name === pieceQuery);
-            if (foundPiece) {
-                return foundPiece.name;
-            }
-        }
-        return pieces[0].name;
-    }, [pieceQuery, pieces]);
     
-    const [activeTab, setActiveTab] = useState(getTabFromQuery);
+    const [activeTab, setActiveTab] = useState(() => {
+        const pieceQuery = searchParams.get('piece');
+        const foundPiece = pieces.find(p => p.name === pieceQuery);
+        return foundPiece ? foundPiece.name : pieces[0].name;
+    });
 
     useEffect(() => {
-        const targetTab = getTabFromQuery();
-        if (targetTab !== activeTab) {
-            setActiveTab(targetTab);
+        const pieceQuery = searchParams.get('piece');
+        const foundPiece = pieces.find(p => p.name === pieceQuery);
+        if (foundPiece && foundPiece.name !== activeTab) {
+            setActiveTab(foundPiece.name);
         }
-    }, [getTabFromQuery, activeTab]);
+    }, [searchParams, pieces, activeTab]);
 
     return (
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
