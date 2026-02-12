@@ -27,7 +27,7 @@ type Piece = {
 const PieceInfoCard = ({ name, description, value, details }: Piece) => {
     return (
         <Dialog>
-            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-10 md:min-h-[220px]">
+            <div className="bg-gradient-to-br from-card to-muted border border-border/50 rounded-2xl flex flex-col items-center justify-center text-center p-6 md:p-10 md:min-h-[200px]">
               <div className="max-w-xl">
                 <p className="font-semibold text-primary mb-2 uppercase tracking-wider text-sm">
                   {value === '∞' 
@@ -107,20 +107,20 @@ const PieceImageTrigger = ({ piece }: { piece: Piece }) => {
 
 export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     const searchParams = useSearchParams();
+    const pieceQuery = searchParams.get('piece');
     
-    const [activeTab, setActiveTab] = useState(() => {
-        const pieceQuery = searchParams.get('piece');
-        const foundPiece = pieces.find(p => p.name === pieceQuery);
-        return foundPiece ? foundPiece.name : pieces[0].name;
-    });
+    const [activeTab, setActiveTab] = useState(pieces[0].name);
 
     useEffect(() => {
-        const pieceQuery = searchParams.get('piece');
         const foundPiece = pieces.find(p => p.name === pieceQuery);
-        if (foundPiece && foundPiece.name !== activeTab) {
+        if (foundPiece) {
             setActiveTab(foundPiece.name);
+        } else {
+            // Fallback to the first piece if the query is not valid
+            // or on initial load when query is null.
+            setActiveTab(pieces[0].name);
         }
-    }, [searchParams, pieces, activeTab]);
+    }, [pieceQuery, pieces]);
 
     return (
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
