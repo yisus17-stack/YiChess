@@ -109,20 +109,24 @@ export function RulesPiecesTabs({ pieces }: { pieces: Piece[] }) {
     const searchParams = useSearchParams();
     const pieceQuery = searchParams.get('piece');
 
-    const getInitialTab = () => {
-        return pieceQuery && pieces.find(p => p.name === pieceQuery)
-            ? pieceQuery
-            : pieces[0].name;
-    };
+    const getTabFromQuery = React.useCallback(() => {
+        if (pieceQuery) {
+            const foundPiece = pieces.find(p => p.name === pieceQuery);
+            if (foundPiece) {
+                return foundPiece.name;
+            }
+        }
+        return pieces[0].name;
+    }, [pieceQuery, pieces]);
     
-    const [activeTab, setActiveTab] = useState(getInitialTab);
+    const [activeTab, setActiveTab] = useState(getTabFromQuery);
 
     useEffect(() => {
-        const targetTab = pieceQuery && pieces.find(p => p.name === pieceQuery) ? pieceQuery : null;
-        if (targetTab && targetTab !== activeTab) {
+        const targetTab = getTabFromQuery();
+        if (targetTab !== activeTab) {
             setActiveTab(targetTab);
         }
-    }, [pieceQuery, pieces, activeTab]);
+    }, [getTabFromQuery, activeTab]);
 
     return (
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
