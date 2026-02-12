@@ -55,8 +55,8 @@ export default function HomePage() {
                 <Image
                     src="/chess.png"
                     alt="Héroe de Ajedrez"
-                    width={300}
-                    height={300}
+                    width={400}
+                    height={400}
                     className="object-contain drop-shadow-2xl"
                     priority
                 />
