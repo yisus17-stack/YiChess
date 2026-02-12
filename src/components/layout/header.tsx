@@ -96,7 +96,7 @@ function SearchDialog() {
           <Search className="h-5 w-5" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-none rounded-none p-0 flex flex-col top-0 translate-y-0 h-[40vh] rounded-b-2xl data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top">
+      <DialogContent className="w-full max-w-none rounded-none p-0 flex flex-col top-0 translate-y-0 h-[55vh] rounded-b-2xl data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top">
         <DialogHeader>
           <DialogTitle className="sr-only">Búsqueda</DialogTitle>
           <DialogDescription className="sr-only">
