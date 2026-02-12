@@ -1,53 +1,88 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { GraduationCap, BrainCog, Trophy } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Inicio | YiChess',
 };
 
-export default function HomePage() {
+const features = [
+  {
+    icon: <GraduationCap className="size-10 text-primary" />,
+    title: 'Aprende y Domina',
+    description: 'Desde los movimientos básicos hasta estrategias complejas, te guiamos en cada paso de tu aprendizaje.',
+    href: '/reglas'
+  },
+  {
+    icon: <BrainCog className="size-10 text-primary" />,
+    title: 'Entrena tu Mente',
+    description: 'Resuelve miles de puzzles tácticos adaptados a tu nivel y afila tu visión de juego.',
+    href: '/puzzles'
+  },
+  {
+    icon: <Trophy className="size-10 text-primary" />,
+    title: 'Compite y Gana',
+    description: 'Mide tus habilidades contra nuestra IA avanzada o desafía a otros jugadores en partidas emocionantes.',
+    href: '/jugar'
+  }
+];
 
+export default function HomePage() {
   return (
     <>
-      <div className="w-full">
+      {/* Hero Section */}
+      <div className="w-full bg-background">
         <div className="max-w-[1200px] w-full mx-auto px-10">
-          <div className="grid md:grid-cols-2 items-center gap-x-8 gap-y-12 py-16 md:py-24">
-            <div className="flex flex-col items-center md:items-start text-center md:text-left">
-              <span className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground block mb-4">
-                Plataforma de Ajedrez
-              </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tighter mb-6">
-                Aprende de ajedrez en <span className="text-primary">YiChess</span>
-              </h1>
-              <p className="text-lg text-muted-foreground font-light leading-relaxed max-w-lg mb-8">
-                La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all">
-                  Empezar ahora
-                </Link>
-                <Link href="/reglas" className="inline-block w-full sm:w-auto text-center border border-border text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-accent transition-all">
-                  Ver reglas
-                </Link>
-              </div>
-            </div>
-            <div className="flex items-center justify-center row-start-1 md:row-auto">
-              <div className="animate-fadeInSoft">
-                <Image
-                  alt="YiChess Pro"
-                  className="w-full max-w-[280px] sm:max-w-xs md:max-w-sm h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
-                  src="/chessin-hero.png"
-                  width={380}
-                  height={380}
-                  priority
-                />
-              </div>
+          <div className="text-center py-20 md:py-28">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-foreground tracking-tighter mb-6 animate-fadeInSoft">
+              El Ajedrez, <br className="md:hidden" />
+              Elevado a <span className="text-primary">Arte</span>.
+            </h1>
+            <p className="max-w-2xl mx-auto text-lg text-muted-foreground font-light leading-relaxed mb-10">
+              Tu viaje para dominar el tablero comienza aquí. Aprende, practica y compite en la plataforma definitiva para ajedrecistas de todos los niveles.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto mx-auto">
+              <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-white px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-black transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                Empezar a Jugar
+              </Link>
+              <Link href="/estrategias" className="inline-block w-full sm:w-auto text-center border border-border text-primary px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-accent transition-all">
+                Explorar Estrategias
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      <div className="max-w-[1200px] w-full mx-auto px-10">
+      
+      {/* Features Section */}
+      <div className="w-full bg-muted/30">
+        <div className="max-w-[1200px] w-full mx-auto px-10 py-20 md:py-24">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-4xl font-bold tracking-tight text-foreground">
+              Todo lo que necesitas para ser un Gran Maestro
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              YiChess te proporciona las herramientas y la comunidad para crecer.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature) => (
+              <Link href={feature.href} key={feature.title} className="group block">
+                <div className="bg-card border border-border/50 rounded-2xl p-8 h-full transition-all duration-300 hover:shadow-xl hover:border-primary/20 hover:-translate-y-1">
+                  <div className="bg-primary/5 border border-primary/10 rounded-lg p-4 w-max mb-6">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Card Section (Kept as is) */}
+      <div className="max-w-[1200px] w-full mx-auto px-10 py-20">
         <div className="bg-primary rounded-3xl p-16 text-center flex flex-col items-center gap-10 shadow-2xl relative overflow-hidden">
           <div className="absolute -right-10 -bottom-10 opacity-5">
             <svg className="text-white size-[300px]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
