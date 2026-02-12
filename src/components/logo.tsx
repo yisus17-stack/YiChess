@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <div className={cn("text-primary dark:text-white size-8", className)}>
+    <div className={cn("text-black size-8", className)}>
       <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <path
           clipRule="evenodd"
