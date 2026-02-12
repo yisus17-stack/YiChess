@@ -10,6 +10,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   'contacto': 'Contacto',
   'jugar': 'Jugar',
   'puzzles': 'Puzzles',
+  'mapa-del-sitio': 'Mapa del Sitio',
 };
 
 export function AppBreadcrumb() {

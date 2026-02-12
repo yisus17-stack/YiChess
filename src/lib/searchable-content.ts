@@ -7,6 +7,7 @@ export const searchableContent: SearchableContent[] = [
   { title: 'Reglas', path: '/reglas', description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y conceptos fundamentales.', keywords: 'normas piezas movimiento' },
   { title: 'Estrategias', path: '/estrategias', description: 'Descubre estrategias, aperturas y tácticas para mejorar tu juego y ganar más partidas.', keywords: 'tácticas aperturas mates' },
   { title: 'Contacto', path: '/contacto', description: 'Envíanos tus sugerencias, preguntas o comentarios sobre YiChess.', keywords: 'email mensaje' },
+  { title: 'Mapa del Sitio', path: '/mapa-del-sitio', description: 'Encuentra todas las secciones y páginas de YiChess en un solo lugar.', keywords: 'sitemap estructura' },
   { title: 'Principios de Apertura', path: '/estrategias', description: 'Controla el centro y desarrolla tus piezas para una sólida ventaja inicial.', keywords: 'estrategia apertura desarrollo' },
   { title: 'Gambito de Dama', path: '/estrategias', description: 'Una apertura clásica y respetada que busca el control posicional.', keywords: 'estrategia apertura' },
   { title: 'Defensa Siciliana', path: '/estrategias', description: 'La respuesta más popular y agresiva contra 1.e4. Lucha por la iniciativa.', keywords: 'estrategia apertura defensa' },

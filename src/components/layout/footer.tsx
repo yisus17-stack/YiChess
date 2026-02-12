@@ -12,9 +12,14 @@ export function AppFooter() {
             <Logo className="size-6" />
             <span className="font-bold text-lg text-foreground">YiChess</span>
           </Link>
-          <p className="text-sm text-muted-foreground text-center md:text-right">
-            &copy; {currentYear} YiChess. Todos los derechos reservados.
-          </p>
+          <div className="flex items-center gap-6 text-sm">
+            <Link href="/mapa-del-sitio" className="text-muted-foreground hover:text-foreground transition-colors">
+              Mapa del Sitio
+            </Link>
+            <p className="text-sm text-muted-foreground text-center md:text-right">
+              &copy; {currentYear} YiChess. Todos los derechos reservados.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
