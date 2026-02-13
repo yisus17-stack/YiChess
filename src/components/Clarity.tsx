@@ -1,22 +1,13 @@
 'use client';
-import Script from 'next/script';
+import { useEffect } from 'react';
 
 export const Clarity = () => {
-  if (process.env.NODE_ENV !== 'production') return null;
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      const clarity = require('@microsoft/clarity-js');
+      clarity.start({ projectId: 'vgs07lu7a9' });
+    }
+  }, []);
 
-  return (
-    <Script
-      id="clarity"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
-          (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/vgs07lu7a9";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "vgs07lu7a9");
-        `,
-      }}
-    />
-  );
+  return null;
 };
