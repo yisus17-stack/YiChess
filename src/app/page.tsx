@@ -116,8 +116,8 @@ export default function HomePage() {
               <Link href="/puzzles" className="text-center bg-background text-foreground font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
                 Resolver Puzzles
               </Link>
-              <Link href="/estrategias" className="text-center bg-transparent border border-primary-foreground/40 text-primary-foreground font-bold py-6 px-12 rounded-xl hover:bg-primary-foreground/10 transition-all text-sm uppercase tracking-[0.2em]">
-                Aprender Estrategias
+              <Link href="/reglas" className="text-center bg-transparent border border-primary-foreground/40 text-primary-foreground font-bold py-6 px-12 rounded-xl hover:bg-primary-foreground/10 transition-all text-sm uppercase tracking-[0.2em]">
+                Aprender Reglas
               </Link>
             </div>
           </div>
