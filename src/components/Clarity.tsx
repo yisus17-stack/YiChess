@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 export const Clarity = () => {
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      const clarity = require('@microsoft/clarity-js');
-      clarity.start({ projectId: 'vgs07lu7a9' });
+      const script = document.createElement('script');
+      script.src = 'https://www.clarity.ms/tag/vgs07lu7a9';
+      script.async = true;
+      document.head.appendChild(script);
     }
   }, []);
 

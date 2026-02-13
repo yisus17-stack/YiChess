@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppHeader } from '@/components/layout/header';
@@ -31,14 +30,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="relative flex min-h-dvh flex-col bg-background">
           <AppHeader />
           <main className="relative flex-1 flex flex-col">
-            <div id="main-content" className="w-full flex flex-col items-center pb-16 md:pb-24">
+            <div
+              id="main-content"
+              className="w-full flex flex-col items-center pb-16 md:pb-24"
+            >
               {children}
             </div>
           </main>
           <AppFooter />
         </div>
         <Toaster />
-        <Clarity /> {/* Clarity se activa solo en producción */}
+        <Clarity /> {/* Solo cliente, solo producción */}
       </body>
     </html>
   );
