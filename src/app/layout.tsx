@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppHeader } from '@/components/layout/header';
@@ -5,6 +6,7 @@ import { AppFooter } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Lexend } from 'next/font/google';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -20,14 +22,26 @@ const lexend = Lexend({
   variable: '--font-lexend',
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${lexend.variable} light scroll-smooth`}>
-      <head />
+      <head>
+        {process.env.NODE_ENV === 'production' && (
+          <Script
+            id="clarity"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/TU_ID_DE_CLARITY";
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "vgs07lu7a9");
+              `,
+            }}
+          />
+        )}
+      </head>
       <body className={cn('font-display antialiased')}>
         <div className="relative flex min-h-dvh flex-col bg-background">
           <AppHeader />
