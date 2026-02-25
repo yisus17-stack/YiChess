@@ -6,7 +6,7 @@ import { Chessboard } from 'react-chessboard';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { RotateCcw, ChevronLeft, Flag, Trophy, History, Timer, Clock } from 'lucide-react';
+import { RotateCcw, ChevronLeft, Flag, Trophy, History, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
@@ -35,7 +35,7 @@ export function ChessGame() {
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Responsividad total del tablero
+  // Responsividad total: Detección de ancho del contenedor
   useEffect(() => {
     const handleResize = () => {
       if (boardContainerRef.current) {
@@ -43,12 +43,21 @@ export function ChessGame() {
       }
     };
 
+    const resizeObserver = new ResizeObserver(handleResize);
+    if (boardContainerRef.current) {
+      resizeObserver.observe(boardContainerRef.current);
+    }
+
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
+    };
   }, []);
 
-  // Lógica del Reloj corregida
+  // Lógica del Reloj
   useEffect(() => {
     if (timerActive && !winner && selectedTime > 0) {
       timerRef.current = setInterval(() => {
@@ -154,12 +163,12 @@ export function ChessGame() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-start justify-center pb-20 w-full px-4">
-      {/* Columna del Tablero */}
+      {/* Columna del Tablero: Totalmente Responsiva */}
       <div className="w-full lg:flex-1 max-w-[600px] flex flex-col items-center mx-auto">
-        {/* Reloj Negras */}
+        {/* Reloj Negras (Oculto si no hay tiempo seleccionado) */}
         {selectedTime > 0 && (
           <div className={cn(
-            "w-full flex justify-between items-center mb-4 p-4 border transition-all",
+            "w-full flex justify-between items-center mb-2 p-4 border transition-all",
             game.turn() === 'b' && !winner ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
           )}>
             <div className="flex items-center gap-3">
@@ -174,7 +183,7 @@ export function ChessGame() {
 
         <div 
           ref={boardContainerRef}
-          className="w-full aspect-square border-4 border-primary/20 bg-card"
+          className="w-full aspect-square border-4 border-primary/10 bg-card overflow-hidden"
         >
           <Chessboard 
             position={fen} 
@@ -187,10 +196,10 @@ export function ChessGame() {
           />
         </div>
 
-        {/* Reloj Blancas */}
+        {/* Reloj Blancas (Oculto si no hay tiempo seleccionado) */}
         {selectedTime > 0 && (
           <div className={cn(
-            "w-full flex justify-between items-center mt-4 p-4 border transition-all",
+            "w-full flex justify-between items-center mt-2 p-4 border transition-all",
             game.turn() === 'w' && !winner ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
           )}>
             <div className="flex items-center gap-3">
@@ -204,17 +213,17 @@ export function ChessGame() {
         )}
       </div>
 
-      {/* Columna de Controles */}
+      {/* Columna de Controles: Diseño Plano y Minimalista */}
       <div className="w-full lg:w-[350px] space-y-4">
         <Card className="border-border rounded-none shadow-none">
           <CardHeader className="bg-muted border-b border-border py-4">
             <CardTitle className="text-lg flex items-center gap-2 font-black uppercase tracking-tighter">
               <Trophy className={cn("size-5", winner ? "text-primary" : "text-muted-foreground")} />
-              Control de Partida
+              Panel de Control
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-6 space-y-6">
-            {/* Estado Principal */}
+            {/* Estado Principal Plano */}
             <div className={cn(
               "text-xl font-black p-6 text-center border transition-all",
               winner ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground border-border"
@@ -222,10 +231,10 @@ export function ChessGame() {
               {getStatusText()}
             </div>
 
-            {/* Configuración de Tiempo */}
+            {/* Configuración de Tiempo Plana */}
             <div className="space-y-2">
               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
-                <Clock className="size-3" /> Configurar Tiempo
+                <Clock className="size-3" /> Tiempo de Partida
               </label>
               <Select 
                 disabled={moveHistory.length > 0 || winner !== null}
@@ -238,7 +247,7 @@ export function ChessGame() {
                 }}
               >
                 <SelectTrigger className="h-12 rounded-none border-border font-bold">
-                  <SelectValue placeholder="Selecciona tiempo" />
+                  <SelectValue placeholder="Configurar tiempo" />
                 </SelectTrigger>
                 <SelectContent>
                   {TIME_OPTIONS.map((opt) => (
@@ -283,8 +292,8 @@ export function ChessGame() {
           </CardContent>
         </Card>
 
-        {/* Historial de Movimientos */}
-        <Card className="border-border rounded-none shadow-none h-[300px] flex flex-col overflow-hidden">
+        {/* Notación Algebraica Plana */}
+        <Card className="border-border rounded-none shadow-none h-[250px] flex flex-col overflow-hidden">
           <CardHeader className="bg-muted border-b border-border py-4 shrink-0">
             <CardTitle className="text-lg flex items-center gap-2 font-black uppercase tracking-tighter">
               <History className="size-5 text-muted-foreground" />
@@ -295,7 +304,7 @@ export function ChessGame() {
             <div className="h-full overflow-y-auto p-4 bg-white dark:bg-slate-950">
               {moveHistory.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full opacity-30 text-center">
-                  <p className="text-xs font-black uppercase tracking-widest">Esperando primer movimiento</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest">Partida en curso</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-1">
