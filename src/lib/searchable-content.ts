@@ -2,8 +2,7 @@ import type { SearchableContent } from '@/lib/definitions';
 
 export const searchableContent: SearchableContent[] = [
   { title: 'Inicio', path: '/', description: 'Página principal de YiChess. Comienza tu viaje en el ajedrez.', keywords: 'home principal' },
-  { title: 'Jugar', path: '/jugar', description: 'Juega partidas de ajedrez contra la IA. Pon a prueba tus habilidades.', keywords: 'partida ia computadora' },
-  { title: 'Puzzles', path: '/puzzles', description: 'Resuelve puzzles y problemas de ajedrez para mejorar tu táctica y visión de juego.', keywords: 'problemas táctica' },
+  { title: 'Jugar', path: '/jugar', description: 'Juega partidas de ajedrez local con reglas oficiales. Practica tus movimientos.', keywords: 'partida local tablero fide' },
   { title: 'Reglas', path: '/reglas', description: 'Aprende las reglas básicas del ajedrez, el movimiento de las piezas y conceptos fundamentales.', keywords: 'normas piezas movimiento' },
   { title: 'Estrategias', path: '/estrategias', description: 'Descubre estrategias, aperturas y tácticas para mejorar tu juego y ganar más partidas.', keywords: 'tácticas aperturas mates' },
   { title: 'Contacto', path: '/contacto', description: 'Envíanos tus sugerencias, preguntas o comentarios sobre YiChess.', keywords: 'email mensaje' },

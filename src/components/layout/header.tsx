@@ -181,7 +181,6 @@ export function AppHeader() {
   const navLinks = [
     { href: "/", label: "Inicio" },
     { href: "/jugar", label: "Jugar" },
-    { href: "/puzzles", label: "Puzzles" },
     { href: "/reglas", label: "Reglas" },
     { href: "/estrategias", label: "Estrategias" },
     { href: "/contacto", label: "Contacto" },

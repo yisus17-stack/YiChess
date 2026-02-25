@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { GraduationCap, BrainCog, Trophy } from 'lucide-react';
+import { GraduationCap, Trophy, Swords } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Inicio | YiChess',
@@ -15,15 +15,15 @@ const features = [
     href: '/reglas'
   },
   {
-    icon: <BrainCog className="size-10 text-primary" />,
-    title: 'Entrena tu Mente',
-    description: 'Resuelve miles de puzzles tácticos adaptados a tu nivel y afila tu visión de juego.',
-    href: '/puzzles'
+    icon: <Swords className="size-10 text-primary" />,
+    title: 'Estrategias de Élite',
+    description: 'Explora aperturas, tácticas y conceptos estratégicos para mejorar tu nivel de juego rápidamente.',
+    href: '/estrategias'
   },
   {
     icon: <Trophy className="size-10 text-primary" />,
     title: 'Compite y Gana',
-    description: 'Mide tus habilidades contra nuestra IA avanzada o desafía a otros jugadores en partidas emocionantes.',
+    description: 'Mide tus habilidades en una partida limpia y profesional con nuestro tablero de competición.',
     href: '/jugar'
   }
 ];
@@ -40,7 +40,7 @@ export default function HomePage() {
                 <span className="block">Aprende ajedrez en <span className="text-primary">YiChess</span></span>
               </h1>
               <p className="max-w-2xl mx-auto md:mx-0 text-lg text-muted-foreground font-light leading-relaxed mb-8 md:mb-10">
-                La plataforma para ajedrecistas que buscan aprender. Aprende jugadas, movimientos, piezas y estrategias.
+                La plataforma definitiva para ajedrecistas que buscan excelencia. Aprende jugadas, movimientos, piezas y estrategias maestras.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full sm:w-auto mx-auto md:mx-0">
                 <Link href="/jugar" className="inline-block w-full sm:w-auto text-center bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
@@ -83,7 +83,7 @@ export default function HomePage() {
               Todo lo que necesitas para ser un Gran Maestro
             </h2>
             <p className="mt-4 text-muted-foreground">
-              YiChess te proporciona las herramientas y la comunidad para crecer.
+              YiChess te proporciona las herramientas y el conocimiento para alcanzar la excelencia en el tablero.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -110,11 +110,11 @@ export default function HomePage() {
               Comienza con YiChess Hoy Mismo
             </h1>
             <p className="text-primary-foreground/80 text-base font-light max-w-2xl leading-relaxed mt-4 mx-auto">
-              Mejora tus habilidades de ajedrez con YiChess.
+              Mejora tus habilidades tácticas y estratégicas con la plataforma más avanzada para el aprendizaje del ajedrez.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 z-10 mt-8 justify-center">
-              <Link href="/puzzles" className="text-center bg-background text-foreground font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
-                Resolver Puzzles
+              <Link href="/jugar" className="text-center bg-background text-foreground font-black py-6 px-12 rounded-xl hover:scale-105 transition-all text-sm uppercase tracking-[0.2em] shadow-lg">
+                Jugar Ahora
               </Link>
               <Link href="/reglas" className="text-center bg-transparent border border-primary-foreground/40 text-primary-foreground font-bold py-6 px-12 rounded-xl hover:bg-primary-foreground/10 transition-all text-sm uppercase tracking-[0.2em]">
                 Aprender Reglas

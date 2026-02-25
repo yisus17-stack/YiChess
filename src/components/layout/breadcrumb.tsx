@@ -9,7 +9,6 @@ const breadcrumbNameMap: { [key: string]: string } = {
   'estrategias': 'Estrategias',
   'contacto': 'Contacto',
   'jugar': 'Jugar',
-  'puzzles': 'Puzzles',
   'mapa-del-sitio': 'Mapa del Sitio',
 };
 

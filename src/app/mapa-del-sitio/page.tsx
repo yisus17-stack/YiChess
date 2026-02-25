@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AppBreadcrumb } from '@/components/layout/breadcrumb';
-import { Home, Gamepad2, Puzzle, BookOpen, BrainCircuit, Mail } from 'lucide-react';
+import { Home, Gamepad2, BookOpen, BrainCircuit, Mail } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Mapa del Sitio',
@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 
 const navLinks = [
     { href: "/", label: "Inicio", description: "Vuelve a la página principal.", icon: <Home className="size-8 text-primary" /> },
-    { href: "/jugar", label: "Jugar", description: "Desafía a nuestra IA en una partida de ajedrez.", icon: <Gamepad2 className="size-8 text-primary" /> },
-    { href: "/puzzles", label: "Puzzles", description: "Agudiza tu mente con nuestros puzzles de táctica.", icon: <Puzzle className="size-8 text-primary" /> },
+    { href: "/jugar", label: "Jugar", description: "Inicia una partida de ajedrez local con reglas oficiales.", icon: <Gamepad2 className="size-8 text-primary" /> },
     { href: "/reglas", label: "Reglas", description: "Aprende todo sobre el movimiento de las piezas y las reglas del juego.", icon: <BookOpen className="size-8 text-primary" /> },
     { href: "/estrategias", label: "Estrategias", description: "Explora aperturas, tácticas y conceptos estratégicos.", icon: <BrainCircuit className="size-8 text-primary" /> },
     { href: "/contacto", label: "Contacto", description: "Ponte en contacto con nosotros para cualquier consulta.", icon: <Mail className="size-8 text-primary" /> },
@@ -40,7 +39,7 @@ export default function MapaDelSitioPage() {
         <header className="text-center mb-12 md:mb-16">
             <h1 className="text-5xl font-extrabold text-foreground tracking-tighter mb-4">Mapa del Sitio</h1>
             <p className="text-lg font-light text-muted-foreground max-w-2xl mx-auto">
-                Navega fácilmente por todas las secciones de YiChess. Aquí tienes un resumen de todo nuestro contenido.
+                Navega fácilmente por todas las secciones de YiChess. Aquí tienes un resumen de todo nuestro contenido educativo y de juego.
             </p>
         </header>
 
