@@ -35,7 +35,7 @@ export function ChessGame() {
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Responsividad total: Detección de ancho del contenedor
+  // Responsividad: Ajuste dinámico del tablero
   useEffect(() => {
     const handleResize = () => {
       if (boardContainerRef.current) {
@@ -85,7 +85,7 @@ export function ChessGame() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [timerActive, winner, selectedTime, game]);
+  }, [timerActive, winner, selectedTime]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -145,9 +145,15 @@ export function ChessGame() {
     });
   };
 
+  const undoMove = () => {
+    game.undo();
+    setFen(game.fen());
+    setMoveHistory(game.history());
+  };
+
   const handleResign = () => {
-    const resigWinner = game.turn() === 'w' ? 'NEGRAS' : 'BLANCAS';
-    setWinner(resigWinner);
+    const resignWinner = game.turn() === 'w' ? 'NEGRAS' : 'BLANCAS';
+    setWinner(resignWinner);
     setTimerActive(false);
     toast({
       title: "RENDICIÓN",
@@ -155,35 +161,30 @@ export function ChessGame() {
     });
   };
 
-  const getStatusText = () => {
-    if (winner) return `VICTORIA: ${winner}`;
-    if (game.isCheck()) return '¡JAQUE!';
-    return game.turn() === 'w' ? 'TURNO: BLANCAS' : 'TURNO: NEGRAS';
-  };
-
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-start justify-center pb-20 w-full px-4">
-      {/* Columna del Tablero: Totalmente Responsiva */}
-      <div className="w-full lg:flex-1 max-w-[600px] flex flex-col items-center mx-auto">
-        {/* Reloj Negras (Oculto si no hay tiempo seleccionado) */}
-        {selectedTime > 0 && (
-          <div className={cn(
-            "w-full flex justify-between items-center mb-2 p-4 border transition-all",
-            game.turn() === 'b' && !winner ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
-          )}>
-            <div className="flex items-center gap-3">
-              <div className="size-8 bg-slate-900 flex items-center justify-center text-white font-bold text-xs">B</div>
-              <span className="font-black text-sm uppercase tracking-tighter">Negras</span>
-            </div>
-            <div className="flex items-center gap-2 font-mono text-3xl font-black">
+    <div className="flex flex-col lg:flex-row gap-8 items-start justify-center pb-20 w-full">
+      {/* Tablero y Relojes */}
+      <div className="w-full lg:flex-1 max-w-[600px] space-y-4">
+        {/* Barra Negras */}
+        <div className={cn(
+          "flex justify-between items-center p-3 border rounded-md transition-colors",
+          game.turn() === 'b' && !winner ? "bg-[#f4f4f4] border-gray-300" : "bg-white border-transparent"
+        )}>
+          <div className="flex items-center gap-3">
+            <div className="size-8 bg-slate-900 flex items-center justify-center text-white font-bold text-xs rounded-sm">B</div>
+            <span className="font-bold text-sm">Negras</span>
+          </div>
+          {selectedTime > 0 && (
+            <div className="flex items-center gap-2 font-mono text-xl font-bold">
+              <Clock className="size-4 text-gray-500" />
               {formatTime(blackTime)}
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         <div 
           ref={boardContainerRef}
-          className="w-full aspect-square border-4 border-primary/10 bg-card overflow-hidden"
+          className="w-full aspect-square bg-card overflow-hidden shadow-sm border border-gray-100"
         >
           <Chessboard 
             position={fen} 
@@ -191,50 +192,48 @@ export function ChessGame() {
             boardOrientation="white"
             animationDuration={200}
             boardWidth={boardWidth}
-            customDarkSquareStyle={{ backgroundColor: '#769656' }}
-            customLightSquareStyle={{ backgroundColor: '#eeeed2' }}
+            customDarkSquareStyle={{ backgroundColor: '#d1d5db' }}
+            customLightSquareStyle={{ backgroundColor: '#f3f4f6' }}
           />
         </div>
 
-        {/* Reloj Blancas (Oculto si no hay tiempo seleccionado) */}
-        {selectedTime > 0 && (
-          <div className={cn(
-            "w-full flex justify-between items-center mt-2 p-4 border transition-all",
-            game.turn() === 'w' && !winner ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
-          )}>
-            <div className="flex items-center gap-3">
-              <div className="size-8 bg-slate-100 border border-border flex items-center justify-center text-slate-800 font-bold text-xs">W</div>
-              <span className="font-black text-sm uppercase tracking-tighter">Blancas</span>
-            </div>
-            <div className="flex items-center gap-2 font-mono text-3xl font-black">
+        {/* Barra Blancas */}
+        <div className={cn(
+          "flex justify-between items-center p-3 border rounded-md transition-colors",
+          game.turn() === 'w' && !winner ? "bg-[#e8f0d1] border-[#c5d3a2]" : "bg-white border-transparent"
+        )}>
+          <div className="flex items-center gap-3">
+            <div className="size-8 bg-white border border-gray-300 flex items-center justify-center text-slate-800 font-bold text-xs rounded-sm">W</div>
+            <span className="font-bold text-sm">Blancas</span>
+          </div>
+          {selectedTime > 0 && (
+            <div className="flex items-center gap-2 font-mono text-xl font-bold">
+              <Clock className="size-4 text-gray-500" />
               {formatTime(whiteTime)}
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {/* Columna de Controles: Diseño Plano y Minimalista */}
+      {/* Panel Lateral de Controles */}
       <div className="w-full lg:w-[350px] space-y-4">
-        <Card className="border-border rounded-none shadow-none">
-          <CardHeader className="bg-muted border-b border-border py-4">
-            <CardTitle className="text-lg flex items-center gap-2 font-black uppercase tracking-tighter">
-              <Trophy className={cn("size-5", winner ? "text-primary" : "text-muted-foreground")} />
-              Panel de Control
+        <Card className="shadow-sm border-gray-100 rounded-lg overflow-hidden">
+          <CardHeader className="py-4 border-b border-gray-50 bg-white">
+            <CardTitle className="text-base flex items-center gap-2 font-bold">
+              <Trophy className="size-5 text-gray-400" />
+              Partida Local
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-6 space-y-6">
-            {/* Estado Principal Plano */}
-            <div className={cn(
-              "text-xl font-black p-6 text-center border transition-all",
-              winner ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground border-border"
-            )}>
-              {getStatusText()}
+            <div className="bg-gray-50 rounded-md p-4 text-center border border-gray-100">
+              <span className="text-lg font-extrabold uppercase tracking-tight">
+                {winner ? `Ganador: ${winner}` : `Turno: ${game.turn() === 'w' ? 'Blancas' : 'Negras'}`}
+              </span>
             </div>
 
-            {/* Configuración de Tiempo Plana */}
             <div className="space-y-2">
-              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
-                <Clock className="size-3" /> Tiempo de Partida
+              <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 flex items-center gap-2 px-1">
+                <Clock className="size-3" /> Tiempo Inicial
               </label>
               <Select 
                 disabled={moveHistory.length > 0 || winner !== null}
@@ -246,12 +245,12 @@ export function ChessGame() {
                   setBlackTime(t);
                 }}
               >
-                <SelectTrigger className="h-12 rounded-none border-border font-bold">
-                  <SelectValue placeholder="Configurar tiempo" />
+                <SelectTrigger className="h-11 rounded-md border-gray-200 shadow-none">
+                  <SelectValue placeholder="Elegir tiempo" />
                 </SelectTrigger>
                 <SelectContent>
                   {TIME_OPTIONS.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value.toString()} className="font-bold">
+                    <SelectItem key={opt.value} value={opt.value.toString()}>
                       {opt.label}
                     </SelectItem>
                   ))}
@@ -259,31 +258,27 @@ export function ChessGame() {
               </Select>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               <Button 
                 variant="outline" 
-                onClick={() => {
-                  game.undo();
-                  setFen(game.fen());
-                  setMoveHistory(game.history());
-                }} 
+                onClick={undoMove} 
                 disabled={moveHistory.length === 0 || !!winner} 
-                className="h-12 rounded-none border-border font-bold uppercase text-xs"
+                className="h-11 rounded-md border-gray-200 text-gray-600 font-bold"
               >
-                <ChevronLeft className="size-4 mr-1" /> Deshacer
+                <ChevronLeft className="size-4 mr-2" /> Deshacer
               </Button>
               <Button 
                 variant="outline" 
                 onClick={resetGame} 
-                className="h-12 rounded-none border-border font-bold uppercase text-xs"
+                className="h-11 rounded-md border-gray-200 text-gray-600 font-bold"
               >
-                <RotateCcw className="size-4 mr-1" /> Reiniciar
+                <RotateCcw className="size-4 mr-2" /> Reiniciar
               </Button>
             </div>
             
             <Button 
               variant="destructive" 
-              className="w-full h-12 rounded-none font-black uppercase tracking-widest text-xs" 
+              className="w-full h-11 rounded-md font-bold bg-[#ef4444] hover:bg-[#dc2626]" 
               disabled={!!winner}
               onClick={handleResign}
             >
@@ -292,36 +287,34 @@ export function ChessGame() {
           </CardContent>
         </Card>
 
-        {/* Notación Algebraica Plana */}
-        <Card className="border-border rounded-none shadow-none h-[250px] flex flex-col overflow-hidden">
-          <CardHeader className="bg-muted border-b border-border py-4 shrink-0">
-            <CardTitle className="text-lg flex items-center gap-2 font-black uppercase tracking-tighter">
-              <History className="size-5 text-muted-foreground" />
+        {/* Notación Algebraica */}
+        <Card className="shadow-sm border-gray-100 rounded-lg h-[300px] flex flex-col overflow-hidden">
+          <CardHeader className="py-4 border-b border-gray-50 bg-white">
+            <CardTitle className="text-base flex items-center gap-2 font-bold">
+              <History className="size-5 text-gray-400" />
               Notación
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-0 flex-1 overflow-hidden">
-            <div className="h-full overflow-y-auto p-4 bg-white dark:bg-slate-950">
-              {moveHistory.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full opacity-30 text-center">
-                  <p className="text-[10px] font-black uppercase tracking-widest">Partida en curso</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 gap-1">
-                  {Array.from({ length: Math.ceil(moveHistory.length / 2) }).map((_, i) => (
-                    <React.Fragment key={i}>
-                      <div className="flex items-center p-2 bg-muted/50 border border-border">
-                        <span className="text-[9px] font-black text-muted-foreground w-6">{i + 1}.</span>
-                        <span className="font-mono font-bold text-sm">{moveHistory[i * 2]}</span>
-                      </div>
-                      <div className="flex items-center p-2 bg-muted/20 border border-border">
-                        <span className="font-mono font-bold text-sm">{moveHistory[i * 2 + 1] || '...'}</span>
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
-              )}
-            </div>
+          <CardContent className="p-0 flex-1 overflow-auto bg-[#fafafa]">
+            {moveHistory.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full italic text-gray-400 text-sm p-10 text-center">
+                Mueve una pieza para empezar
+              </div>
+            ) : (
+              <div className="p-4 grid grid-cols-2 gap-x-4 gap-y-1">
+                {Array.from({ length: Math.ceil(moveHistory.length / 2) }).map((_, i) => (
+                  <React.Fragment key={i}>
+                    <div className="text-sm font-medium py-1 px-2 flex justify-between">
+                      <span className="text-gray-300 mr-2">{i + 1}.</span>
+                      <span className="font-bold">{moveHistory[i * 2]}</span>
+                    </div>
+                    <div className="text-sm font-bold py-1 px-2">
+                      {moveHistory[i * 2 + 1] || ''}
+                    </div>
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
