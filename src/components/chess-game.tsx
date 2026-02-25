@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
 const TIME_OPTIONS = [
+  { label: 'Sin tiempo', value: 0 },
   { label: '1 min (Bullet)', value: 60 },
   { label: '3 min (Blitz)', value: 180 },
   { label: '5 min (Blitz)', value: 300 },
@@ -23,10 +24,10 @@ export function ChessGame() {
   
   const [fen, setFen] = useState(game.fen());
   const [moveHistory, setMoveHistory] = useState<string[]>([]);
-  const [boardWidth, setBoardWidth] = useState(600);
+  const [boardWidth, setBoardWidth] = useState(400);
+  const boardContainerRef = useRef<HTMLDivElement>(null);
   
-  // Lógica de Tiempo
-  const [selectedTime, setSelectedTime] = useState(300); // 5 min por defecto
+  const [selectedTime, setSelectedTime] = useState(300);
   const [whiteTime, setWhiteTime] = useState(300);
   const [blackTime, setBlackTime] = useState(300);
   const [timerActive, setTimerActive] = useState(false);
@@ -34,27 +35,27 @@ export function ChessGame() {
   
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Responsividad del tablero
+  // Responsividad total del tablero
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth;
-      if (width < 640) setBoardWidth(width - 32);
-      else if (width < 1024) setBoardWidth(480);
-      else setBoardWidth(600);
+      if (boardContainerRef.current) {
+        setBoardWidth(boardContainerRef.current.offsetWidth);
+      }
     };
+
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Lógica del Reloj
+  // Lógica del Reloj corregida
   useEffect(() => {
-    if (timerActive && !winner) {
+    if (timerActive && !winner && selectedTime > 0) {
       timerRef.current = setInterval(() => {
         if (game.turn() === 'w') {
           setWhiteTime((prev) => {
             if (prev <= 0) {
-              setWinner('Negras');
+              setWinner('NEGRAS');
               setTimerActive(false);
               return 0;
             }
@@ -63,7 +64,7 @@ export function ChessGame() {
         } else {
           setBlackTime((prev) => {
             if (prev <= 0) {
-              setWinner('Blancas');
+              setWinner('BLANCAS');
               setTimerActive(false);
               return 0;
             }
@@ -71,13 +72,11 @@ export function ChessGame() {
           });
         }
       }, 1000);
-    } else {
-      if (timerRef.current) clearInterval(timerRef.current);
     }
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [timerActive, winner, game]);
+  }, [timerActive, winner, selectedTime, game]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -93,15 +92,13 @@ export function ChessGame() {
           setFen(game.fen());
           setMoveHistory(game.history());
           
-          // Iniciar timer en el primer movimiento
-          if (!timerActive && !winner) setTimerActive(true);
+          if (!timerActive && !winner && selectedTime > 0) setTimerActive(true);
 
-          // Verificar fin de partida
           if (game.isCheckmate()) {
-            setWinner(game.turn() === 'w' ? 'Negras' : 'Blancas');
+            setWinner(game.turn() === 'w' ? 'NEGRAS' : 'BLANCAS');
             setTimerActive(false);
           } else if (game.isDraw() || game.isStalemate()) {
-            setWinner('Empate');
+            setWinner('EMPATE');
             setTimerActive(false);
           }
           
@@ -112,7 +109,7 @@ export function ChessGame() {
       }
       return null;
     },
-    [game, timerActive, winner]
+    [game, timerActive, winner, selectedTime]
   );
 
   function onDrop(sourceSquare: Square, targetSquare: Square) {
@@ -134,100 +131,101 @@ export function ChessGame() {
     setTimerActive(false);
     setWinner(null);
     toast({
-      title: "Partida Reiniciada",
-      description: `Tiempo configurado a ${selectedTime / 60} minutos.`,
+      title: "PARTIDA REINICIADA",
+      description: selectedTime > 0 ? `Tiempo: ${selectedTime / 60} min.` : "Modo sin tiempo.",
     });
   };
 
   const handleResign = () => {
-    const resigWinner = game.turn() === 'w' ? 'Negras' : 'Blancas';
+    const resigWinner = game.turn() === 'w' ? 'NEGRAS' : 'BLANCAS';
     setWinner(resigWinner);
     setTimerActive(false);
     toast({
-      title: "Partida Finalizada",
+      title: "RENDICIÓN",
       description: `Las ${game.turn() === 'w' ? 'Blancas' : 'Negras'} se han rendido.`,
     });
   };
 
   const getStatusText = () => {
-    if (winner === 'Empate') return '¡Tablas!';
-    if (winner) return `¡Victoria de las ${winner}!`;
-    if (game.isCheck()) return '¡Jaque!';
-    return game.turn() === 'w' ? 'Turno: Blancas' : 'Turno: Negras';
+    if (winner) return `VICTORIA: ${winner}`;
+    if (game.isCheck()) return '¡JAQUE!';
+    return game.turn() === 'w' ? 'TURNO: BLANCAS' : 'TURNO: NEGRAS';
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-start justify-center pb-20">
+    <div className="flex flex-col lg:flex-row gap-8 items-start justify-center pb-20 w-full px-4">
       {/* Columna del Tablero */}
-      <div className="flex-1 flex flex-col items-center">
+      <div className="w-full lg:flex-1 max-w-[600px] flex flex-col items-center mx-auto">
         {/* Reloj Negras */}
-        <div className={cn(
-          "w-full max-w-[500px] lg:max-w-none flex justify-between items-center mb-4 p-3 rounded-lg border transition-all",
-          game.turn() === 'b' && !winner ? "bg-primary/20 border-primary ring-2 ring-primary/50" : "bg-muted/30 border-border"
-        )}>
-          <div className="flex items-center gap-2">
-            <div className="size-8 bg-slate-800 rounded flex items-center justify-center text-white font-bold text-xs">B</div>
-            <span className="font-bold">Negras</span>
+        {selectedTime > 0 && (
+          <div className={cn(
+            "w-full flex justify-between items-center mb-4 p-4 border transition-all",
+            game.turn() === 'b' && !winner ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
+          )}>
+            <div className="flex items-center gap-3">
+              <div className="size-8 bg-slate-900 flex items-center justify-center text-white font-bold text-xs">B</div>
+              <span className="font-black text-sm uppercase tracking-tighter">Negras</span>
+            </div>
+            <div className="flex items-center gap-2 font-mono text-3xl font-black">
+              {formatTime(blackTime)}
+            </div>
           </div>
-          <div className="flex items-center gap-2 font-mono text-2xl font-black">
-            <Timer className="size-5" />
-            {formatTime(blackTime)}
-          </div>
-        </div>
+        )}
 
         <div 
-          className="bg-card border-4 border-primary/20 rounded-xl overflow-hidden shadow-2xl transition-all"
-          style={{ width: boardWidth, height: boardWidth }}
+          ref={boardContainerRef}
+          className="w-full aspect-square border-4 border-primary/20 bg-card"
         >
           <Chessboard 
             position={fen} 
             onPieceDrop={onDrop} 
             boardOrientation="white"
             animationDuration={200}
-            customDarkSquareStyle={{ backgroundColor: 'hsl(var(--primary) / 0.35)' }}
-            customLightSquareStyle={{ backgroundColor: 'hsl(var(--background))' }}
-            customBoardStyle={{ borderRadius: '4px' }}
+            boardWidth={boardWidth}
+            customDarkSquareStyle={{ backgroundColor: '#769656' }}
+            customLightSquareStyle={{ backgroundColor: '#eeeed2' }}
           />
         </div>
 
         {/* Reloj Blancas */}
-        <div className={cn(
-          "w-full max-w-[500px] lg:max-w-none flex justify-between items-center mt-4 p-3 rounded-lg border transition-all",
-          game.turn() === 'w' && !winner ? "bg-primary/20 border-primary ring-2 ring-primary/50" : "bg-muted/30 border-border"
-        )}>
-          <div className="flex items-center gap-2">
-            <div className="size-8 bg-slate-100 border border-border rounded flex items-center justify-center text-slate-800 font-bold text-xs">W</div>
-            <span className="font-bold">Blancas</span>
+        {selectedTime > 0 && (
+          <div className={cn(
+            "w-full flex justify-between items-center mt-4 p-4 border transition-all",
+            game.turn() === 'w' && !winner ? "bg-primary text-primary-foreground border-primary" : "bg-muted border-border"
+          )}>
+            <div className="flex items-center gap-3">
+              <div className="size-8 bg-slate-100 border border-border flex items-center justify-center text-slate-800 font-bold text-xs">W</div>
+              <span className="font-black text-sm uppercase tracking-tighter">Blancas</span>
+            </div>
+            <div className="flex items-center gap-2 font-mono text-3xl font-black">
+              {formatTime(whiteTime)}
+            </div>
           </div>
-          <div className="flex items-center gap-2 font-mono text-2xl font-black">
-            <Timer className="size-5" />
-            {formatTime(whiteTime)}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Columna de Controles */}
-      <div className="w-full lg:w-[380px] space-y-6">
-        <Card className="border-border/50 shadow-xl">
-          <CardHeader className="bg-muted/30 border-b border-border/50 py-4">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Trophy className={cn("size-5", winner ? "text-primary animate-bounce" : "text-muted-foreground")} />
-              Partida Local
+      <div className="w-full lg:w-[350px] space-y-4">
+        <Card className="border-border rounded-none shadow-none">
+          <CardHeader className="bg-muted border-b border-border py-4">
+            <CardTitle className="text-lg flex items-center gap-2 font-black uppercase tracking-tighter">
+              <Trophy className={cn("size-5", winner ? "text-primary" : "text-muted-foreground")} />
+              Control de Partida
             </CardTitle>
           </CardHeader>
-          <CardContent className="pt-6 space-y-5">
+          <CardContent className="pt-6 space-y-6">
             {/* Estado Principal */}
             <div className={cn(
-              "text-xl font-black p-5 rounded-xl text-center shadow-inner border transition-all",
-              winner ? "bg-primary text-primary-foreground scale-105" : "bg-secondary/50 text-foreground border-border/50"
+              "text-xl font-black p-6 text-center border transition-all",
+              winner ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground border-border"
             )}>
               {getStatusText()}
             </div>
 
-            {/* Configuración de Tiempo (Solo antes de empezar) */}
+            {/* Configuración de Tiempo */}
             <div className="space-y-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-                <Clock className="size-3" /> Tiempo Inicial
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-2">
+                <Clock className="size-3" /> Configurar Tiempo
               </label>
               <Select 
                 disabled={moveHistory.length > 0 || winner !== null}
@@ -239,12 +237,12 @@ export function ChessGame() {
                   setBlackTime(t);
                 }}
               >
-                <SelectTrigger className="h-12 rounded-lg">
+                <SelectTrigger className="h-12 rounded-none border-border font-bold">
                   <SelectValue placeholder="Selecciona tiempo" />
                 </SelectTrigger>
                 <SelectContent>
                   {TIME_OPTIONS.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value.toString()}>
+                    <SelectItem key={opt.value} value={opt.value.toString()} className="font-bold">
                       {opt.label}
                     </SelectItem>
                   ))}
@@ -252,7 +250,7 @@ export function ChessGame() {
               </Select>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="grid grid-cols-2 gap-2">
               <Button 
                 variant="outline" 
                 onClick={() => {
@@ -261,53 +259,53 @@ export function ChessGame() {
                   setMoveHistory(game.history());
                 }} 
                 disabled={moveHistory.length === 0 || !!winner} 
-                className="h-12 rounded-lg"
+                className="h-12 rounded-none border-border font-bold uppercase text-xs"
               >
-                <ChevronLeft className="size-4" /> Deshacer
+                <ChevronLeft className="size-4 mr-1" /> Deshacer
               </Button>
               <Button 
                 variant="outline" 
                 onClick={resetGame} 
-                className="h-12 rounded-lg"
+                className="h-12 rounded-none border-border font-bold uppercase text-xs"
               >
-                <RotateCcw className="size-4" /> Reiniciar
+                <RotateCcw className="size-4 mr-1" /> Reiniciar
               </Button>
             </div>
             
             <Button 
               variant="destructive" 
-              className="w-full h-12 rounded-lg flex items-center gap-2 shadow-sm font-bold" 
+              className="w-full h-12 rounded-none font-black uppercase tracking-widest text-xs" 
               disabled={!!winner}
               onClick={handleResign}
             >
-               <Flag className="size-4" /> Rendirse
+               <Flag className="size-4 mr-2" /> Rendirse
             </Button>
           </CardContent>
         </Card>
 
         {/* Historial de Movimientos */}
-        <Card className="border-border/50 shadow-xl h-[350px] flex flex-col overflow-hidden">
-          <CardHeader className="bg-muted/30 border-b border-border/50 py-4 shrink-0">
-            <CardTitle className="text-lg flex items-center gap-2 font-bold">
+        <Card className="border-border rounded-none shadow-none h-[300px] flex flex-col overflow-hidden">
+          <CardHeader className="bg-muted border-b border-border py-4 shrink-0">
+            <CardTitle className="text-lg flex items-center gap-2 font-black uppercase tracking-tighter">
               <History className="size-5 text-muted-foreground" />
               Notación
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0 flex-1 overflow-hidden">
-            <div className="h-full overflow-y-auto p-4 custom-scrollbar bg-slate-50 dark:bg-slate-900/20">
+            <div className="h-full overflow-y-auto p-4 bg-white dark:bg-slate-950">
               {moveHistory.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full py-10 opacity-30">
-                  <p className="text-sm italic font-medium">Mueve una pieza para empezar</p>
+                <div className="flex flex-col items-center justify-center h-full opacity-30 text-center">
+                  <p className="text-xs font-black uppercase tracking-widest">Esperando primer movimiento</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+                <div className="grid grid-cols-2 gap-1">
                   {Array.from({ length: Math.ceil(moveHistory.length / 2) }).map((_, i) => (
                     <React.Fragment key={i}>
-                      <div className="flex items-center justify-between bg-white dark:bg-slate-950 p-2 rounded border border-border/40">
-                        <span className="text-[10px] text-muted-foreground font-black pr-2 border-r mr-2">{i + 1}.</span>
-                        <span className="font-mono font-bold text-sm flex-1 text-center">{moveHistory[i * 2]}</span>
+                      <div className="flex items-center p-2 bg-muted/50 border border-border">
+                        <span className="text-[9px] font-black text-muted-foreground w-6">{i + 1}.</span>
+                        <span className="font-mono font-bold text-sm">{moveHistory[i * 2]}</span>
                       </div>
-                      <div className="flex items-center justify-center bg-white/60 dark:bg-slate-950/60 p-2 rounded border border-border/40">
+                      <div className="flex items-center p-2 bg-muted/20 border border-border">
                         <span className="font-mono font-bold text-sm">{moveHistory[i * 2 + 1] || '...'}</span>
                       </div>
                     </React.Fragment>
